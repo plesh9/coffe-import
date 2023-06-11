@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/coffe-import/static/css/main.c064892c.css",
-    "main.js": "/coffe-import/static/js/main.801084c5.js",
+    "main.js": "/coffe-import/static/js/main.9698e736.js",
     "static/media/Rubik-Bold.ttf": "/coffe-import/static/media/Rubik-Bold.433b599535e1d929aaf8.ttf",
     "static/media/Rubik-Regular.ttf": "/coffe-import/static/media/Rubik-Regular.f887c9f4ac165f5e1912.ttf",
     "static/media/Rubik-BoldItalic.ttf": "/coffe-import/static/media/Rubik-BoldItalic.80929e39f338e1a77fa2.ttf",
@@ -11,10 +11,10 @@
     "index.html": "/coffe-import/index.html",
     "static/media/search.svg": "/coffe-import/static/media/search.46f83f6bbf60bc904bb85857bf65b5ea.svg",
     "main.c064892c.css.map": "/coffe-import/static/css/main.c064892c.css.map",
-    "main.801084c5.js.map": "/coffe-import/static/js/main.801084c5.js.map"
+    "main.9698e736.js.map": "/coffe-import/static/js/main.9698e736.js.map"
   },
   "entrypoints": [
     "static/css/main.c064892c.css",
-    "static/js/main.801084c5.js"
+    "static/js/main.9698e736.js"
   ]
 }
