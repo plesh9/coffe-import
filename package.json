@@ -1,17 +1,42 @@
 {
   "name": "coffe-import",
+  "homepage": "https://plesh9.github.io/coffe-import",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
+    "axios": "^1.4.0",
+    "cors": "^2.8.5",
+    "express": "^4.18.2",
+    "firebase": "^8.10.1",
+    "gh-pages": "^5.0.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-icons": "^4.9.0",
+    "react-loader-spinner": "^5.3.4",
+    "react-paginate": "^8.2.0",
+    "react-redux": "^8.1.1",
+    "react-router-dom": "^6.14.2",
     "react-scripts": "5.0.1",
-    "web-vitals": "^2.1.4"
+    "react-xml-parser": "^1.1.8",
+    "redux": "^4.2.1",
+    "redux-thunk": "^2.4.2",
+    "requirejs": "^2.3.6",
+    "sass": "^1.63.6",
+    "scss": "^0.2.4",
+    "simple-xml-to-json": "^1.1.7",
+    "swiper": "^9.3.2",
+    "web-vitals": "^2.1.4",
+    "xml-js": "^1.6.11"
+  },
+  "devDependencies": {
+    "@babel/runtime": "7.13.8"
   },
   "scripts": {
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
