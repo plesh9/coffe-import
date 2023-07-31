@@ -1,20 +1,21 @@
 {
   "files": {
-    "main.css": "/coffe-import/static/css/main.b410fd87.css",
-    "main.js": "/coffe-import/static/js/main.f2bca4fa.js",
+    "main.css": "/coffe-import/static/css/main.506633f2.css",
+    "main.js": "/coffe-import/static/js/main.20e0013c.js",
     "static/media/Rubik-Bold.ttf": "/coffe-import/static/media/Rubik-Bold.433b599535e1d929aaf8.ttf",
     "static/media/Rubik-Regular.ttf": "/coffe-import/static/media/Rubik-Regular.f887c9f4ac165f5e1912.ttf",
     "static/media/Rubik-BoldItalic.ttf": "/coffe-import/static/media/Rubik-BoldItalic.80929e39f338e1a77fa2.ttf",
     "static/media/Rubik-Italic.ttf": "/coffe-import/static/media/Rubik-Italic.4aa5af0f001b4ad51763.ttf",
     "static/media/logo.png": "/coffe-import/static/media/logo.cf4e51e0ffcaab89b40d.png",
+    "static/media/missing-image.svg": "/coffe-import/static/media/missing-image.107e93902ff19e6a25396b13f380c196.svg",
     "static/media/basket.svg": "/coffe-import/static/media/basket.58667f9ab914ba96bbda9ab2cdd754a3.svg",
     "index.html": "/coffe-import/index.html",
     "static/media/search.svg": "/coffe-import/static/media/search.46f83f6bbf60bc904bb85857bf65b5ea.svg",
-    "main.b410fd87.css.map": "/coffe-import/static/css/main.b410fd87.css.map",
-    "main.f2bca4fa.js.map": "/coffe-import/static/js/main.f2bca4fa.js.map"
+    "main.506633f2.css.map": "/coffe-import/static/css/main.506633f2.css.map",
+    "main.20e0013c.js.map": "/coffe-import/static/js/main.20e0013c.js.map"
   },
   "entrypoints": [
-    "static/css/main.b410fd87.css",
-    "static/js/main.f2bca4fa.js"
+    "static/css/main.506633f2.css",
+    "static/js/main.20e0013c.js"
   ]
 }
