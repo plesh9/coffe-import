@@ -10,14 +10,20 @@ import Footer from "./components/Footer/Footer";
 import ScrollButton from "./components/Btns/ScrollButton";
 import PaginatedItems from "./components/CardsList/productPage";
 import Loader from "./components/Loader";
-import { closeLoader, openLoader } from "./tools/subFunctions";
+import { closeLoader, openLoader, scrollLock } from "./tools/subFunctions";
 import CategotyList from "./components/Categories/CategoryList";
+import CatalogList from "./components/Categories/CatalogList";
+import BasketWindow from "./components/Basket/BasketWindow";
+import NotFound from "./components/NotFound";
+import Navbar from "./components/Navbar/Navbar";
+import Checkout from "./components/Checkout/Checkout";
+import Thanks from "./components/Thanks";
 
 function App() {
   const shop = useSelector((state) => state.shop)
   const dispatch = useDispatch()
-  console.log(shop);
   const m_12 = useMediaQuery("(min-width: 1201px)");
+  console.log(shop);
 
   // get shop on load
   useEffect(() => {
@@ -27,23 +33,41 @@ function App() {
     })
   }, [])
 
+  if (shop.isLoading) {
+    return <Loader />
+  }
+
   return (
-    <>
-    {shop.isLoading ? <Loader /> :
+    <div className="app">
+      <Routes>
+          <Route path="/*" element={<MainApp m_12={m_12} /> } />
+          <Route path="/checkout" element={<><Checkout /><Footer /></> } />
+          <Route path="/thanks" element={<Thanks   /> } />
+      </Routes>
+    </div>
+
+  );
+}
+
+function MainApp ({ m_12 }) {
+  return (
       <div className="App">
-        <Header m_12={m_12} />
+        <Header />
         <main>
             <Routes>
               <Route path="/" element={<Main m_12={m_12} />} />
-              <Route path="/products/:categoryId" element={<PaginatedItems itemsPerPage={m_12 ? 32 : 16} pagination={true} />} />
-              <Route path="/catalog" element={<CategotyList itemsPerPage={m_12 ? 32 : 16} pagination={true} />} />
+              <Route path="/catalog" element={<CatalogList itemsPerPage={32} pagination={true} />} />
+              <Route path="/catalog/:catalogPath" element={<CategotyList itemsPerPage={32} pagination={true} />} />
+              <Route path="/catalog/:catalogPath/:categoryId" element={<PaginatedItems itemsPerPage={m_12 ? 32 : 16} pagination={true} />} />
+              <Route path="/*" element={<NotFound title="На жаль, такої сторінки немає :(" /> } />
             </Routes>
         </main>
         <Footer />
         <ScrollButton />
-      </div>}
-    </>
-  );
+        <BasketWindow />
+        <Navbar />
+      </div>
+  )
 }
 
 export default App;
