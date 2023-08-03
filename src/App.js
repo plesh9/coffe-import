@@ -18,6 +18,7 @@ import NotFound from "./components/NotFound";
 import Navbar from "./components/Navbar/Navbar";
 import Checkout from "./components/Checkout/Checkout";
 import Thanks from "./components/Thanks";
+import axios from "axios";
 
 function App() {
   const shop = useSelector((state) => state.shop)
