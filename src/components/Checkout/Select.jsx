@@ -1,13 +1,16 @@
 import { useEffect, useState } from "react";
 import {MdError} from 'react-icons/md';
+import { useDispatch } from "react-redux";
 
 
-function Select({ cities, selectedOption, 
-    setSelectedOption, selectValid, setSelectValid, name, general=false,min=2, label = true, placeholder, validation=true }) {
-    const [filterCities, setFilterCities] = useState(null)
+function Select({ items, selectedOption, 
+    setSelectedOption, selectValid, setSelectValid, name, general=false,min=2, label = true, placeholder, error }) {
+    const [filterItems, setFilterItems] = useState(null)
     const [serachInputText, setSerachInputText] = useState('');
     const [selectActive, setSelectActive] = useState(false)
-    const minLen = (cities?.length >= 1000 ? 2 : min)
+    const minLen = (items?.length >= 1000 ? 2 : min)
+    const dispatch = useDispatch()
+
 
     const onSelectEnter = (e) => {
         let serachText = e.target.value
@@ -15,24 +18,24 @@ function Select({ cities, selectedOption,
         
         if (serachText.length >= minLen) {
             setSelectActive(true)
-            const startArray = cities?.filter(city => city?.Description?.toLowerCase().startsWith(serachText.toLowerCase()))
-            const generalArray = cities?.filter(city => city?.Description?.toLowerCase().includes(serachText.toLowerCase()))
-            setFilterCities(general ? generalArray : startArray)
+            const startArray = items?.filter(item => item?.Description?.toLowerCase().startsWith(serachText.toLowerCase()))
+            const generalArray = items?.filter(item => item?.Description?.toLowerCase().includes(serachText.toLowerCase()))
+            setFilterItems(general ? generalArray : startArray)
         } else {
             setSelectActive(false)
-            setFilterCities(null)
+            setFilterItems(null)
         }
     }
 
-    const onClickSelect = (e, city) => {
-        setSelectedOption(city)
-        setSerachInputText(city.Description)
+    const onClickSelect = (e, item) => {
+        dispatch(setSelectedOption(item))
+        setSerachInputText(item.Description)
         setSelectActive(false)
     }
 
     const onSelectBlur = (e) => {
         if (!e.target.value){
-            setSelectedOption(null)
+            dispatch(setSelectedOption(null))
         }
     }
 
@@ -56,24 +59,23 @@ function Select({ cities, selectedOption,
     }, [])
 
     useEffect(() => {
-        if (!validation) return
         if (serachInputText.length >= minLen && !selectActive) {
-            const validOption = cities?.find(city => city.Description === serachInputText)
+            const validOption = items?.find(item => item.Description === serachInputText)
             if (!validOption) {
-                setSelectValid(false)
-                setSelectedOption(null)
+                dispatch(setSelectValid(false))
+                dispatch(setSelectedOption(null))
                 return
             }
-            setSelectValid(true)
-            setSelectedOption(validOption)
+            dispatch(setSelectValid(true))
+            dispatch(setSelectedOption(validOption))
         }
     }, [serachInputText, selectActive])
 
     useEffect(() => {
-        setFilterCities(cities)
-        setSelectValid(true)
+        setFilterItems(items)
+        dispatch(setSelectValid(true))
         setSerachInputText('')
-    }, [cities])
+    }, [items])
     
     return ( 
         <div className="field select" id={`select-${name}`}>
@@ -90,10 +92,10 @@ function Select({ cities, selectedOption,
                 />
                 {selectActive ? 
                     <div className="select__menu">
-                        {filterCities?.length ? 
+                        {filterItems?.length ? 
                             <ul className="select__list">
-                                {filterCities?.map((city, i) => {
-                                    return <CityItem city={city} selectedOption={selectedOption} onClickSelect={onClickSelect} key={i} />
+                                {filterItems?.map((item, i) => {
+                                    return <Item item={item} selectedOption={selectedOption} onClickSelect={onClickSelect} key={i} />
                                 })}
                             </ul> 
                             : <p className="select__undefinded">Нічого не знайдено</p> }
@@ -101,16 +103,16 @@ function Select({ cities, selectedOption,
                 }
             </div>
             {!selectValid ? <p className="field__invalid"><MdError />
-            {!selectValid && "Місто вказане не вірно"}</p> : ''}
+            {!selectValid && error}</p> : ''}
         </div>
      );
 }
 
-function CityItem({ city, onClickSelect, selectedOption }) {
+function Item({ item, onClickSelect, selectedOption }) {
     return (
         <li>
-            <button className={`select__btn ${city.Description === selectedOption?.Description ? '_selected' : ''}`} onClick={(e) => onClickSelect(e, city)}>
-                {city.Description}
+            <button className={`select__btn ${item.Description === selectedOption?.Description ? '_selected' : ''}`} onClick={(e) => onClickSelect(e, item)}>
+                {item.Description}
             </button>
         </li>
     )

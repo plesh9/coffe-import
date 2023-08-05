@@ -27,8 +27,6 @@ function BasketWindow() {
         scrollUnlock() 
     }
 
-
-
     return ( 
         <div className={`modal ${show ? "modal-isActive" : ''}`} >
             <div className="modal__overlay" onClick={closeModalOnClickOut} data-lp>

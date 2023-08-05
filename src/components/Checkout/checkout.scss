@@ -74,6 +74,7 @@
         column-gap: rem(10);
         row-gap: rem(25);
         grid-template-columns: 1fr 1fr;
+        margin-bottom: rem(20);
         @media (max-width: $mobileSmall) {
             grid-template-columns: 1fr;
         }
@@ -88,71 +89,20 @@
     &__courier{
         margin-top: rem(10);
         display: grid;
-        column-gap: rem(20);
+        gap: rem(20);
         grid-template-columns: 3fr 1fr 1fr;
-    }
-}
-.checkout .checkout-select {
-    margin-top: rem(25);
-    &__control {
-        background-color: #fff;
-        box-shadow: none;
-        border-color: #d2d2d2 !important;
-        border-radius: 3px;
-        min-height: rem(40);
-        height: rem(40);
-        transition: none !important;
-        &--menu-is-open {
-            border-color: $accentColor !important;
-            border-radius: 3px 3px 0 0;
-            & svg {
-                transform: rotate(180deg);
-                color: rgba(0, 0, 0, 0.708) !important;
-            }
+        @media (max-width:$mobile){
+                gap: rem(10);
+             grid-template-columns: 1fr 1fr; 
+             & .field{
+                &:first-child{
+                    grid-column: span 2;
+                }
+                &__input{
+                    width: 100%;
+                }
+             }
         }
-    }
-    &__indicators {
-        cursor: pointer;
-        @media (any-hover: hover) {
-            &:hover svg {
-                color: rgba(0, 0, 0, 0.708);
-            }
-        }
-        & svg {
-            transition: all 0.3s ease;
-            color: hsl(0, 0%, 80%);
-        }
-    }
-    &__value-container {
-        cursor: text;
-    }
-    &__menu {
-        margin: 0;
-        padding: 0;
-        border-top-right-radius: 0;
-        border-top-left-radius: 0;
-        overflow: hidden;
-        border: rem(1) solid #d2d2d2;
-        border-top: none;
-        border-radius: 0 0 3px 3px;
-        box-shadow: none;
-        // animation: scaleIn 0.2s ease 1;
-        &-list {
-            // margin: 0;
-        }
-    }
-    &__option {
-        cursor: pointer;
-        background-color: #fff !important;
-        &--is-focused {
-            background-color: rgba(233, 233, 233, 0.597) !important;
-        }
-        &--is-selected {
-            background-color: $accentColor !important;
-        }
-    }
-    &__invalid{
-        margin-top: rem(10);
     }
 }
 
@@ -355,9 +305,16 @@
     }
 }
 .thanks{
+    position: fixed;
     display: flex;
     flex-direction: column;
-    min-height: 100vh;
+    top: 0;
+    left: 0;
+    background-color: #fff;
+    height: 100vh;
+    width: 100%;
+    overflow: hidden;
+    z-index: 99;
     &__container{
         display: flex;
         align-items: center;

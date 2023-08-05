@@ -8,8 +8,8 @@ const INCREASE_CART_ITEM_COUNT = 'INCREASE_CART_ITEM_COUNT'
 const DECREASE_CART_ITEM_COUNT = 'DECREASE_CART_ITEM_COUNT'
 const SET_CART_ITEM_DROP_COUNT = 'SET_CART_ITEM_DROP_COUNT'
 const SET_INVALID_DROP = 'SET_INVALID_DROP'
+const TOGGLE_INVALID_DROP = 'TOGGLE_INVALID_DROP'
 const RESET_CART = 'RESET_CART'
-
 
 let initialState = {
     cartItems: [],
@@ -180,6 +180,11 @@ const cartReducer = (state = initialState, action) => {
                 dropTotal: dropArray.reduce((prev, curr) => { return parseInt(prev) + (parseInt(curr.totalPrice) + parseInt(curr.dropPrice) * parseInt(curr.count))}, 0),
 
             }
+        case TOGGLE_INVALID_DROP:
+            return {
+                ...state,
+                dropInvalid: action.state
+            }
 
         default: return state
     }
@@ -214,6 +219,9 @@ export const setCartItemDropCount = (value, id) => {
 }
 export const setInvalidDrop = (value, id) => {
     return {type: SET_INVALID_DROP, value, id}
+}
+export const toggleInvalidDrop = (state) => {
+    return {type: TOGGLE_INVALID_DROP, state}
 }
 export const resetCart = () => {
     return {type: RESET_CART}

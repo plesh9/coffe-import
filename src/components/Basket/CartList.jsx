@@ -7,12 +7,11 @@ import { useRef } from "react";
 
 function CartList({ className, drop, isAuth }) {
     const dispatch = useDispatch()
-    const { show,  cartItems, total, count, dropInvalid } = useSelector(state => state.cart)  
+    const { cartItems } = useSelector(state => state.cart)  
 
     function handleFormCount(e, id) {
         dispatch(setCartItemCount(e.target.value, id))
     }
-
     function onDelete (id) {
         dispatch(deleteCartItem(id))
     }
@@ -22,21 +21,15 @@ function CartList({ className, drop, isAuth }) {
             dispatch(setCartItemCount('1', id))
         }
     }
-
     function onDecrease(id) {
         dispatch(decreaseCartItem(id))
     }
-
     function onIncrease(id) {
         dispatch(increaseCartItem(id))
     }
-
     function handleDropFormCount(e, id) {
-        // dispatch(setCartItemCount(e.target.value, id))
         dispatch(setCartItemDropCount(e.target.value, id))
-
     }
-
     function onDropFormCountBlur(e, cartItem) {
         dispatch(setInvalidDrop(e.target.value, cartItem.id))
     }
@@ -67,8 +60,6 @@ function CartItem ({ cartItem, handleFormCount, onBlur,
     const [dropInvalid, setDropInvalid] = useState(true)
     const [deleteMode, setCartDeleteMode] = useState(false)
     const dropInp = useRef(null)
-
-
 
     useEffect(() => {
         if (dropInp?.current?.value < 675){

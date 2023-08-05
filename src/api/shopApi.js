@@ -1,8 +1,8 @@
 
 import axios from "axios"
 
-// const SHOP_URL = "https://proxy-cors-server.onrender.com/shop"
-const SHOP_URL = "http://localhost:5000/shop"
+const SHOP_URL = "https://proxy-cors-server.onrender.com/shop"
+// const SHOP_URL = "http://localhost:5000/shop"
 
 
 
