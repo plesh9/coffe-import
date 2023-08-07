@@ -46,5 +46,4 @@ function MainSwiper() {
     </Swiper>
   );
 }
-
 export default MainSwiper;
