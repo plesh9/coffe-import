@@ -43,11 +43,20 @@ const cartReducer = (state = initialState, action) => {
                 dropInvalid: true
             }
         case ADD_TO_CART:
-            let currentItems
+            let cartItem = {
+                title: action.cartItem.title,
+                id: action.cartItem.id, 
+                imgUrl: action.cartItem.imgUrl,
+                price: action.cartItem.price,
+                dropPrice: 0,
+                count: 1,
+                totalPrice: action.cartItem.price
+              }
 
-            if (state.cartItems.find(cart => cart.id === action.cartItem.id)) {
+            let currentItems
+            if (state.cartItems.find(cart => cart.id === cartItem.id)) {
                 const filterItems = state.cartItems.map((item) => {
-                    if (item.id === action.cartItem.id){
+                    if (item.id === cartItem.id){
                         item.count += 1
                         item.totalPrice = item.price * item.count 
                         return item
@@ -58,7 +67,7 @@ const cartReducer = (state = initialState, action) => {
 
             } else {
                 currentItems = state.cartItems
-                currentItems.unshift(action.cartItem)
+                currentItems.unshift(cartItem)
             }
             function knowDrop() {
                 for (let i = 0; i <= currentItems.length; i += 1) {

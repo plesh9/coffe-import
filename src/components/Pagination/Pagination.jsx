@@ -1,7 +1,7 @@
 import ReactPaginate from "react-paginate";
 import "./_pagination.scss"
 
-function Pagination({pageCount, handlePageClick, itemOffset}) {
+function Pagination({pageCount, handlePageClick}) {
   return (
     <ReactPaginate
       breakLabel='...'

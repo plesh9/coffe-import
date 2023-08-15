@@ -5,7 +5,7 @@ import CartList from "../Basket/CartList";
 
 function CheckoutCart() {
   const dispatch = useDispatch();
-  const { show, cartItems, total, count, dropTotal, dropInvalid } = useSelector((state) => state.cart);
+  const { total, dropTotal, dropInvalid } = useSelector((state) => state.cart);
   const isAuth = false
   useEffect(() => {
     if (!isAuth) {

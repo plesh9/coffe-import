@@ -4,9 +4,6 @@ import axios from "axios"
 const SHOP_URL = "https://proxy-cors-server.onrender.com/shop"
 // const SHOP_URL = "http://localhost:5000/shop"
 
-
-
-
 export const shopApi = {
   async getShop(){
       return axios.get(SHOP_URL).then((resp) => {

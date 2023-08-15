@@ -1,17 +1,3 @@
-import { setIsLoading } from "../state/reducers/shopReducer";
-
-export function openLoader(dispatch) {
-  dispatch(setIsLoading(true));
-  document.documentElement.classList.add("no-scroll");
-}
-
-export function closeLoader(dispatch) {
-  dispatch(setIsLoading(false));
-  if (document.documentElement.classList.contains("no-scroll")) {
-    document.documentElement.classList.remove("no-scroll");
-  }
-}
-
 export const scrollLock = () => {
   let body = document.querySelector("body");
   let lock_padding = document.querySelectorAll("[data-lp]");
@@ -32,4 +18,12 @@ export const scrollUnlock = () => {
     }
     body.style.paddingRight = '0px';
     document.documentElement.classList.remove("no-scroll");
+}
+
+export const reduceItem = (array, first, second) => {
+  const value = array.reduce((prev, curr) => { 
+    return parseInt(prev) + (parseInt(curr[first]) + (second ? parseInt(curr[second]) : 0) )
+  }, 0)
+  
+  return value
 }

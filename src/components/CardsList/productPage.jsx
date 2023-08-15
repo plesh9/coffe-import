@@ -7,12 +7,13 @@ import { useParams } from 'react-router-dom';
 import { setCurentCategory, setFilterProducts } from "../../state/reducers/shopReducer";
 import { scrollLock } from "../../tools/subFunctions";
 import { addToCart, showCart } from "../../state/reducers/cartReducer";
+import { usePagination } from "../../hooks/usePagination";
 
 
-function PaginatedItems({ itemsPerPage = 16, pagination = false, title = 'Всі категорії'}) {
+function PaginatedItems({ itemsPerPage, pagination = false, title = 'Всі категорії'}) {
   const {products, categories, filterProducts, currentCategory} = useSelector((state) => state.shop)
-
   const dispatch = useDispatch()
+  const {currentItems, pageCount, handlePageClick, isActive} = usePagination(filterProducts, itemsPerPage)
   const { categoryId } = useParams();
 
   useEffect(() => {
@@ -29,33 +30,10 @@ function PaginatedItems({ itemsPerPage = 16, pagination = false, title = 'Всі
   }, [])
 
   const onByProduct = (currentItem) => {
-    let cartItem = {
-      title: currentItem.title,
-      id: currentItem.id, 
-      imgUrl: currentItem.imgUrl,
-      price: currentItem.price,
-      dropPrice: 0,
-      count: 1,
-      totalPrice: currentItem.price
-    }
-
-    dispatch(addToCart(cartItem))
+    dispatch(addToCart(currentItem))
     dispatch(showCart(true))
     scrollLock()
   }
-
-  // pagination
-  const [itemOffset, setItemOffset] = useState(0);
-  const endOffset = itemOffset + itemsPerPage;
-  const currentItems = filterProducts?.slice(itemOffset, endOffset);
-  const pageCount = Math.ceil(filterProducts?.length / itemsPerPage);
-
-  // Invoke when user click to request another page.
-  const handlePageClick = (event) => {
-    const newOffset = (event.selected * itemsPerPage) % filterProducts?.length;
-    setItemOffset(newOffset);
-    window.scrollTo({top: 0});
-  };
 
   return (
       <div className="productList">
@@ -66,7 +44,7 @@ function PaginatedItems({ itemsPerPage = 16, pagination = false, title = 'Всі
                   <div className="cards-main__list">
                       {currentItems.map(item => <CardItem currentItem={item} onByProduct={onByProduct} key={item.id} />)}
                   </div>
-                  {pagination && <Pagination pageCount={pageCount} handlePageClick={handlePageClick} itemOffset={itemOffset} />}
+                  {pagination && isActive ? <Pagination pageCount={pageCount} handlePageClick={handlePageClick} /> : ''}
                 </> : ''}
             {!currentItems.length && <NotFound title='На даний момент цього товару немає в наявності' />}
           </div>

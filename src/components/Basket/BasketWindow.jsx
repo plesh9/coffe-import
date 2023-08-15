@@ -1,10 +1,9 @@
 import { GrClose } from "react-icons/gr"
 import { scrollUnlock } from "../../tools/subFunctions"
 import  "./basket.scss"
-import { useEffect, useState } from "react"
+import { useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
-import { decreaseCartItem, deleteCartItem, increaseCartItem, setCartItemCount, showCart } from "../../state/reducers/cartReducer"
-import { useRef } from "react"
+import { showCart } from "../../state/reducers/cartReducer"
 import { NavLink } from "react-router-dom"
 import CartList from "./CartList"
 

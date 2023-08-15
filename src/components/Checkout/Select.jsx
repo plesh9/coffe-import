@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import {MdError} from 'react-icons/md';
 import { useDispatch } from "react-redux";
 
-
 function Select({ items, selectedOption, 
     setSelectedOption, selectValid, setSelectValid, name, general=false,min=2, label = true, placeholder, error }) {
     const [filterItems, setFilterItems] = useState(null)

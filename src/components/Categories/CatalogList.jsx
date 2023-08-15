@@ -1,23 +1,11 @@
-import { useState } from "react";
 import { useSelector } from "react-redux";
+import { usePagination } from "../../hooks/usePagination";
 import Pagination from "../Pagination/Pagination";
 import CatalogItem from "./CatalogItem";
 
-function CatalogList({ itemsPerPage = 16, pagination = false, listClassName, title }) {
+function CatalogList({ itemsPerPage, pagination = false, listClassName, title }) {
     const {catalog, categories} = useSelector((state) => state.shop)
-
-    const [itemOffset, setItemOffset] = useState(0);
-
-    const endOffset = itemOffset + itemsPerPage;
-    const currentItems = catalog?.slice(itemOffset, endOffset);
-    const pageCount = Math.ceil(catalog?.length / itemsPerPage);
-  
-    // Invoke when user click to request another page.
-    const handlePageClick = (event) => {
-      const newOffset = (event.selected * itemsPerPage) % catalog?.length;
-      setItemOffset(newOffset);
-      window.scrollTo({top: 0});
-    };
+    const {currentItems, pageCount, handlePageClick, isActive} = usePagination(catalog, itemsPerPage)
 
     return ( 
         <div className="categories">
@@ -26,7 +14,7 @@ function CatalogList({ itemsPerPage = 16, pagination = false, listClassName, tit
                 <ul className={`${listClassName ? listClassName : "category-list"}`}>
                     {currentItems.map(currentCategory => <CatalogItem currentCategory={currentCategory} categories={categories} key={currentCategory.id} />)}
                 </ul>
-                {pagination && <Pagination pageCount={pageCount} handlePageClick={handlePageClick} itemOffset={itemOffset} />}
+                {pagination && isActive ? <Pagination pageCount={pageCount} handlePageClick={handlePageClick} /> : ''}
             </div>
         </div>
      );

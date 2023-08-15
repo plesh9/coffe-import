@@ -9,6 +9,7 @@ import AllcategoryBtn from "../Btns/AllcategoryBtn";
 import { scrollLock } from '../../tools/subFunctions';
 import { useDispatch, useSelector } from "react-redux";
 import { setNavbarActive } from "../../state/reducers/navbarReducer";
+import { NavLink } from "react-router-dom";
 
 function Menu() {
   const { navbarActive } = useSelector(state => state.navbar)
@@ -39,9 +40,9 @@ function Menu() {
           <button className="search__button">Знайти</button>
         </div>
         <div className="menu__right">
-          <a href="#" className="menu__profile">
+          <NavLink to='/login' className="menu__profile">
             <ProfileIcon />
-          </a>
+          </NavLink>
           <Basket />
         </div>
       </nav>

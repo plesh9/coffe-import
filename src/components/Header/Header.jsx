@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import Menu from "./Menu";
-import "./_header.scss";
+import "./header.scss";
 
 
 function Header() {

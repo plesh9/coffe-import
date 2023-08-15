@@ -21,6 +21,7 @@ const ScrollButton = () =>{
       behavior: 'smooth'
     });
   };
+
   useEffect(() => {
     window.addEventListener('scroll', toggleVisible);
     return () => window.removeEventListener('scroll', toggleVisible);
@@ -28,7 +29,7 @@ const ScrollButton = () =>{
   
   return (
     <button className={`scroll-btn ${visible ? 'active' : ''}`} onClick={scrollToTop} data-lp>
-     <BsFillArrowUpCircleFill />
+       <BsFillArrowUpCircleFill />
     </button>
   );
 }

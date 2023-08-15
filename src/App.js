@@ -16,14 +16,14 @@ function App ({ m_12 }) {
         <div className="App">
           <Header />
           <main>
-              <Routes>
-                <Route path="/" element={<Main m_12={m_12} />} />
-                <Route path="/catalog" element={<CatalogList itemsPerPage={32} pagination={true} />} />
-                <Route path="/catalog/:catalogPath" element={<CategotyList itemsPerPage={32} pagination={true} />} />
-                <Route path="/catalog/:catalogPath/:categoryId" element={<PaginatedItems itemsPerPage={m_12 ? 32 : 16} pagination={true} />} />
-                <Route path="/thanks" element={<Thanks /> } />
-                <Route path="/*" element={<NotFound title="На жаль, такої сторінки немає :(" /> } />
-              </Routes>
+            <Routes>
+              <Route path="/" element={<Main m_12={m_12} />} />
+              <Route path="/catalog" element={<CatalogList itemsPerPage={32} pagination={true} />} />
+              <Route path="/catalog/:catalogPath" element={<CategotyList itemsPerPage={32} pagination={true} />} />
+              <Route path="/catalog/:catalogPath/:categoryId" element={<PaginatedItems itemsPerPage={m_12 ? 32 : 16} pagination={true} />} />
+              <Route path="/thanks" element={<Thanks /> } />
+              <Route path="/*" element={<NotFound title="На жаль, такої сторінки немає :(" /> } />
+            </Routes>
           </main>
           <Footer />
           <ScrollButton />
