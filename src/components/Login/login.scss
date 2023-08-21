@@ -1,0 +1,111 @@
+@import "../../Styles/scss/style";
+
+.login{
+    width: 100%;
+    flex: 1 1 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    padding: rem(30) 0;
+    background-color: #f8fafb;
+    @media (max-width: em(540)){
+        padding: 0; 
+    }
+    &__container{
+        position: relative;
+        max-width: rem(540);
+        padding: rem(70);
+        box-shadow: 0 rem(2) rem(3) 0 rgba(0, 0, 0, 0.1);
+        background-color: #fff;
+        @media (max-width: em(540)){
+            flex: 1 1 auto;
+            padding: rem(50) rem(25);
+        }
+        &-lAnim{
+            animation: loginAnim .5s ease 1;
+        }
+        &-rAnim{
+            animation: registerAnim .5s ease 1;
+        }
+    }
+    &__logo{
+        position: absolute;
+        right: rem(20);
+        top: rem(20);
+        display: inline-flex;
+        & .logo__text{
+            display: none;
+        }
+    }
+    &__title{
+        text-align: center;
+	    @include adaptiveValue("font-size", 28, 21, 990, 320, 1);
+    }
+    &__subtitle{
+        text-align: center;
+        margin: 0 auto;
+        margin-top: rem(15);
+        max-width: rem(400);
+        color: #9d9b9b;
+    }
+    &__fields{
+        display: flex;
+        flex-direction: column;
+        row-gap: rem(20);
+        margin-top: rem(35);
+    }
+    &__submit{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        row-gap: rem(15);
+
+        margin-top: rem(40);
+        text-align: center;
+    }
+    &__btn{
+        width: fit-content;
+        min-width: rem(240);
+    }
+    &__redirect{
+        text-align: center;
+        margin-top: rem(30);
+        font-size: rem(14);
+        & button{
+            display: inline-block;
+            margin-top: rem(10);
+            color: $accentColor;
+            @media (any-hover: hover){
+                &:hover{
+                    text-decoration: underline;
+                }
+            }
+            &:active{
+                text-decoration: underline;
+            }
+        }
+    }
+}
+
+@keyframes loginAnim {
+    0%{
+        opacity: 0;
+        transform: scale(0.7);
+    }
+    100%{
+        opacity: 1;
+        transform: scale(1) rotate(0);
+    }
+}
+@keyframes registerAnim {
+    0%{
+        opacity: 0;
+        transform: scale(0.7);
+    }
+    100%{
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+

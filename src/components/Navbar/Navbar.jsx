@@ -1,4 +1,4 @@
-import './_navbar.scss'
+import './navbar.scss'
 import { GrClose } from "react-icons/gr";
 import AllcategoryBtn from '../Btns/AllcategoryBtn';
 import { useEffect } from 'react';
@@ -6,16 +6,22 @@ import Logo from '../Logo';
 import { scrollUnlock } from '../../tools/subFunctions';
 import { useDispatch, useSelector } from 'react-redux';
 import { setNavbarActive } from '../../state/reducers/navbarReducer';
+import { Link } from 'react-router-dom';
+import Avatar from '../Avatar';
 
 
 function Navbar() {
   const { navbarActive } = useSelector(state => state.navbar)
+  const {user, isAuth} = useSelector(state => state.auth)
   const dispatch = useDispatch()
 
   useEffect(() => {
     if (navbarActive) {
       document.body.addEventListener("click", closeNavbarOnClickOut);
-      return () => document.body.removeEventListener("click", closeNavbarOnClickOut);
+      return () => {
+        closeNavbar()
+        document.body.removeEventListener("click", closeNavbarOnClickOut)
+      };
     }
   });
 
@@ -40,10 +46,17 @@ function Navbar() {
             <Logo onClick={closeNavbar} />
           </div>
           <div className="navbar__body">
+          {!isAuth &&
             <div className="navbar__enter">
-              <a href='#' className="navbar__login">Вхід</a>
-              <a href='#' className="navbar__sign">Реєстрація</a>
-            </div>
+              <Link to='/login' className="navbar__login">Вхід</Link>
+              <Link to='/login' state={{registration: true}} className="navbar__sign">Реєстрація</Link>
+            </div> }
+          {isAuth && 
+              <Link to='/cabinet' className='navbar__profile'>
+                <Avatar />
+                <p>{user?.firstname}</p>
+              </Link>
+            }
             <AllcategoryBtn className='navbar__btn' onClick={closeNavbar} />
             <ul className="navbar__list">
               <li className="navbar__item"><a className='navbar__link' href="#">Акції</a></li>

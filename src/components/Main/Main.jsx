@@ -9,7 +9,7 @@ import CategoryList from "../Categories/CategoryList";
 
 function Main({ m_12 }) {
   return (
-    <div>
+    <div className="main__wrapper">
       <div className="swiper__container">
         <MainSwiper />
         {!m_12 && (<AllcategoryBtn />)}

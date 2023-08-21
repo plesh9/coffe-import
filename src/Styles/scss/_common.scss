@@ -1,4 +1,3 @@
-
 [class*="__container"] {
 	max-width: rem($maxWidthContainer + $containerPadding);
 	width: 100%;
@@ -23,16 +22,12 @@
 		object-fit: contain;
 	}
 }
-.wrapper{
-	display: flex;
-	flex-direction: column;
-	min-height: 100vh;
-	overflow-x: hidden;
-}
 .App {
 	display: flex;
 	flex-direction: column;
 	flex: 1 1 auto;
+	min-height: 100vh;
+	overflow-x: hidden;
 	.header-active & {
 		padding-top: rem(70);
 		@media (max-width: $mobile) {
@@ -45,9 +40,12 @@ main {
 	display: flex;
 	flex-direction: column;
 }
+.main__wrapper{
+	// overflow-x: hidden;
+}
 .categories,
-.productList{
-  margin-top: rem(20);
+.productList {
+	margin-top: rem(20);
 }
 footer {
 	flex: 0 0 auto;
@@ -56,7 +54,7 @@ footer {
 	overflow: hidden;
 	height: 100vh;
 }
-.loader{
+.loader {
 	display: flex;
 	align-items: center;
 	justify-content: center;
@@ -70,7 +68,7 @@ footer {
 	overflow: hidden;
 	pointer-events: none;
 	z-index: 999;
-	&._transparent{
+	&._transparent {
 		overflow: auto;
 		height: auto;
 		min-height: 100%;
@@ -138,9 +136,9 @@ footer {
 	transition: transform 0.3s ease, opacity 0.3s ease;
 	background-color: #fff;
 	z-index: 45;
-	@media (max-width: em(1200)){
-		 right: rem(10); 
-		 bottom: rem(10);
+	@media (max-width: em(1200)) {
+		right: rem(10);
+		bottom: rem(10);
 	}
 	&.active {
 		opacity: 1;
@@ -184,7 +182,17 @@ footer {
 			background-color: $accentHover;
 		}
 	}
-	&._disabled{
+	&-transparent {
+		background-color: transparent;
+		color: #000;
+		border: rem(1) solid #e9e9e9;
+		@media (any-hover: hover) {
+			&:hover {
+				background-color: #e9e9e9;
+			}
+		}
+	}
+	&._disabled {
 		opacity: 0.7;
 		pointer-events: none;
 	}
@@ -210,101 +218,152 @@ footer {
 			width: 50%;
 		}
 	}
+	&-secondary{
+		padding: 0;
+		width: auto;
+		&::before{
+			display: none;
+		}
+	}
 }
 .productList,
 .productList__container,
 .categories,
-.categories__container{
+.categories__container {
 	display: flex;
 	flex-direction: column;
 	flex: 1 1 auto;
 }
 .productList,
-.categories{
+.categories {
 	min-height: rem(550);
 }
 main > div > .categories,
-main > div > .productList{
+main > div > .productList {
 	min-height: auto;
 }
-.not-fond{
+.not-fond {
 	display: flex;
 	flex-direction: column;
 	align-items: center;
 	justify-content: center;
 	flex: 1 1 auto;
-    min-height: rem(550);
-	&__title{
+	min-height: rem(550);
+	&__title {
 		font-size: rem(17);
 		text-align: center;
 		max-width: rem(300);
 	}
 }
 .modal {
-    position: fixed;
-    z-index: 99;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    opacity: 0;
-    visibility: hidden;
-    background: rgba(0, 0, 0, 0.387);
-    backdrop-filter: blur(0.1rem);
-    transition: .2s ease;
-    &-isActive{
-        opacity: 1;
-        visibility: visible;
-    }
-    &__overlay {
-        display: flex;
-        width: 100%;
-        height: 100%;
-        position: fixed;
-        left: 0;
-        top: 0;
-        padding: 0;
-        justify-content: center;
-        align-items: center;
-    }
-	&__content{
-		transform: scale(0.7); 
-		transition: all .2s ease;
+	position: fixed;
+	z-index: 99;
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	opacity: 0;
+	visibility: hidden;
+	background: rgba(0, 0, 0, 0.387);
+	backdrop-filter: blur(0.1rem);
+	transition: 0.2s ease;
+	&-isActive {
+		opacity: 1;
+		visibility: visible;
 	}
-	&-isActive &__content{
-		transform: scale(1); 
+	&__overlay {
+		display: flex;
+		width: 100%;
+		height: 100%;
+		position: fixed;
+		left: 0;
+		top: 0;
+		padding: 0;
+		justify-content: center;
+		align-items: center;
+	}
+	&__content {
+		transform: scale(0.7);
+		transition: all 0.2s ease;
+		padding: rem(30);
+		background-color: #fff;
+	}
+	&-isActive &__content {
+		transform: scale(1);
 	}
 }
-.field{
+.field {
 	display: flex;
 	flex-direction: column;
 	row-gap: rem(5);
-	&__label{
-		&._invalid{
+	&__label {
+		&._invalid {
 			color: $red;
 		}
 	}
-	&__input{
-		border: rem(1) solid #d2d2d2;
+	&__input {
+		border: rem(1) solid #e9e9e9;
 		border-radius: rem(3);
 		height: rem(40);
 		padding: 0 rem(12);
-		&:focus{
+		&:focus {
 			border-color: $accentColor;
 		}
-		&._invalid{
+		&._invalid {
 			border-color: $red;
 		}
 	}
-	&__invalid{
+	&__invalid {
 		display: flex;
 		align-items: center;
 		column-gap: rem(5);
 		color: $red;
-		& svg{
+		& svg {
 			width: rem(20);
 			height: rem(20);
 			color: $red;
 		}
 	}
+}
+
+.avatar {
+	position: relative;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: rem(35);
+	height: rem(35);
+	background: linear-gradient(to top, #09203f 0%, #537895 100%);
+	color: #fff;
+	border-radius: 50%;
+	font-size: rem(23);
+	font-style: normal;
+	transition: all 0.2s ease;
+	position: relative;
+	text-transform: uppercase;
+	font-weight: 400;
+	text-align: center;
+	line-height: rem(35);
+	font-family: Arial, Helvetica, Rubik, sans-serif;
+	@media (any-hover: hover) {
+		&:hover {
+			filter: brightness(1.1);
+		}
+	}
+	& .warning{
+		display: inline-block;
+		position: absolute;
+		left: rem(-10);
+		top: rem(-5);
+		display: flex;
+		align-items: center;
+		column-gap: rem(5);
+		font-size: rem(12);
+		& svg{
+			color: #f1b813;
+			width: rem(20);
+			height: rem(20);
+		}
+	}
+
 }

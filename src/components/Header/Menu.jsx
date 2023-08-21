@@ -1,10 +1,8 @@
-import { GiSmartphone } from "react-icons/gi";
 import Basket from "../Basket/Basket";
 import search from "../../images/search.svg";
-import Navbar from "../Navbar/Navbar";
-import { useState } from "react";
 import ProfileIcon from "../Icons/ProfileIcon";
 import Logo from "../Logo";
+import Avatar from "../Avatar";
 import AllcategoryBtn from "../Btns/AllcategoryBtn";
 import { scrollLock } from '../../tools/subFunctions';
 import { useDispatch, useSelector } from "react-redux";
@@ -13,6 +11,7 @@ import { NavLink } from "react-router-dom";
 
 function Menu() {
   const { navbarActive } = useSelector(state => state.navbar)
+  const {user, isAuth} = useSelector(state => state.auth)
   const dispatch = useDispatch()
 
   const handleNavbar = () => {
@@ -40,10 +39,13 @@ function Menu() {
           <button className="search__button">Знайти</button>
         </div>
         <div className="menu__right">
-          <NavLink to='/login' className="menu__profile">
-            <ProfileIcon />
-          </NavLink>
           <Basket />
+          {isAuth ? 
+            <NavLink to='/cabinet' className="menu__profile">
+              <Avatar />
+            </NavLink> : 
+            <NavLink to='/login' className="menu__profile"><ProfileIcon /></NavLink>
+          }
         </div>
       </nav>
     </div>

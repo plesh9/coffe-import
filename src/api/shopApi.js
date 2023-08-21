@@ -1,4 +1,3 @@
-
 import axios from "axios"
 
 const SHOP_URL = "https://proxy-cors-server.onrender.com/shop"
@@ -21,7 +20,7 @@ export const shopApi = {
 }
 
 function parseXmlProductToArray(data) {
-  const productList = data.querySelectorAll("offer");
+  const productList = data.querySelectorAll("item");
   const productArray = [];
 
   productList.forEach((el) => {
@@ -30,7 +29,8 @@ function parseXmlProductToArray(data) {
       title: el.querySelector('name').textContent,
       price: el.querySelector('price').textContent,
       // currency: el.querySelector('currencyId').textContent,
-      imgUrl: el.querySelector('picture').textContent,
+      imgUrl: el.querySelector('image').textContent,
+      // imgUrl: el.querySelector('picture').textContent,
       vendor: el.querySelector('vendor').textContent,
       description: el.querySelector('description').textContent.replace(/^\n/,''),
       // quantity_in_stock: el.querySelector('quantity_in_stock').textContent,
