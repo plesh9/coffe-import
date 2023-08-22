@@ -12,7 +12,7 @@ const ordersReducer = (state = initialState, action) => {
         case SET_ORDER:
             return {
                 ...state,
-                orders: [action.newOrder, ...state.orders]
+                orders: [...state.orders, action.newOrder]
             }       
         case SET_ALL_ORDERS:
             return {
