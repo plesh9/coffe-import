@@ -14,7 +14,6 @@ function Login() {
   const [registerMode, setRegisterMode] = useState(location?.state?.registration || false)
   const { register, handleSubmit, watch, formState: { errors, isValid }, reset } = useForm({mode: "onBlur"});
   const { onLogin, onRegister, isLoading } = useAuth()
-  console.log(location);
 
   const changeMode = () => {
     setRegisterMode(prevMode => !prevMode)

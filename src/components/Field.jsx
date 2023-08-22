@@ -18,7 +18,7 @@ function Field({
         validate: (val) => {
           if (!validation) return
 
-          if (watch(validation) != val) {
+          if (watch(validation) !== val) {
             return validationMessage;
           }
         }

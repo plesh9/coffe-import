@@ -148,47 +148,50 @@
             }
         }
     }
-    &__form {
+    &__fields{
+        display: grid;
+        grid-gap: rem(20);
         @media (max-width:$tablet){
-             display: grid;
-             column-gap: rem(20);
-             grid-template-columns: 1fr 1fr; 
+            grid-template-columns: 1fr 1fr; 
+       }
+       @media (max-width:$mobileSmall){
+           grid-template-columns: 1fr; 
+       }
+       & .field {
+        @media (min-width:em(992)){
+            display: grid;
+            column-gap: rem(20);
+            grid-template-columns: 1fr 1fr;
+            align-items: center;
+        }
+        @media (max-width:$tablet){
+            &:nth-child(3){
+                grid-column: span 2;
+            }
+            &:nth-child(4){
+                grid-column: span 2;
+            } 
         }
         @media (max-width:$mobileSmall){
-            grid-template-columns: 1fr; 
+            &:nth-child(3){
+                grid-column: auto;
+            }
+            &:nth-child(4){
+                grid-column: auto;
+            }   
         }
-        & .field {
+        &__invalid {
             @media (min-width:em(992)){
-                display: grid;
-                column-gap: rem(20);
-                grid-template-columns: 1fr 1fr;
-                align-items: center;
+                grid-column: span 2;
+                justify-content: right;
             }
-            @media (max-width:$tablet){
-                &:nth-child(3){
-                    grid-column: span 2;
-                }
-                &:nth-child(4){
-                    grid-column: span 2;
-                } 
-            }
-            @media (max-width:$mobileSmall){
-                &:nth-child(3){
-                    grid-column: auto;
-                }
-                &:nth-child(4){
-                    grid-column: auto;
-                }   
-            }
-            &:not(:last-child) {
-                margin-bottom: rem(20);
-            }
-            &__invalid {
-                @media (min-width:em(992)){
-                    grid-column: span 2;
-                    justify-content: right;
-                }
-            }
+        }
+    }
+    }
+    &__change{
+        margin-top: rem(30);
+        text-align: right;
+        & button{
         }
     }
     &__submit {
