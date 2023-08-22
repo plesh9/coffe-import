@@ -3,7 +3,7 @@ import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { resetCart } from "../../state/reducers/cartReducer";
-import { addNewOrder } from "../../state/reducers/ordersReducer";
+import { addOrder } from "../../state/reducers/ordersReducer";
 import axios from "axios";
 import { scrollLock, scrollUnlock } from "../../tools/subFunctions";
 import Select from "./Select";
@@ -35,6 +35,7 @@ const payOptions = [
 ]
 
 function CheckoutForm({ setIsLoading }) {
+    const { user } = useSelector((state) => state.auth);
     const { dropInvalid, cartItems, total, dropTotal } = useSelector((state) => state.cart);
     const { selectedDeliveryRadio, selectedDelivery, selectedCity, 
         selectedPayRadio, cityValid, warehousesIsLoading, cities } = useSelector((state) => state.newOrder);
@@ -54,35 +55,47 @@ function CheckoutForm({ setIsLoading }) {
     const submitOrder = (data) => {
         if (dropInvalid) return
         if (!selectedDelivery) return
+        const filterCartItems = cartItems.map((item) => {
+            if (dropTotal) {
+                return item
+            }
+            delete item.dropPrice
+        })
+
         const newOrder = {
-            contacts: data,
+            ...data,
             country: selectedCity.Description,
             delivery: selectedDeliveryRadio,
             addres: selectedDelivery.Description || selectedDelivery,
             payment: selectedPayRadio,
-            products: cartItems,
+            products: filterCartItems,
             total: total,
-            dropTotal: dropTotal
         }
-        console.log(newOrder);
+        if (dropTotal > total) {
+            newOrder.dropTotal = dropTotal
+        }
+        if (user?.id) {
+            newOrder.userId = user.id
+        }
 
         scrollLock()
         setIsLoading(true)
-        sendMail(newOrder).then((resp) => {
+        dispatch(addOrder(newOrder)).then((resp) => {
             scrollUnlock()
             setIsLoading(false)
-            
             navigate("/thanks");
             reset()
             dispatch(resetCart())
             dispatch(setSelectedCity(null))
-
-            dispatch(addNewOrder(data, selectedCity.Description, selectedDeliveryRadio, selectedPayRadio, cartItems, total, dropTotal))
         })
+
+        // sendMail(newOrder).then((resp) => {
+        //     dispatch(addNewOrder(newOrder))
+        // })
     }
 
     const sendMail = async (newOrder) => {
-        return await axios.post("https://proxy-cors-server.onrender.com/send_email", {
+        return await axios.post("http://localhost:5000/send_email", {
             headers: {
                 Accept: "application/json",
                 "Content-Type": "application/json",

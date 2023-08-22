@@ -38,7 +38,7 @@ function Settings() {
       {!user.isActivated ? 
       <div className="settings-cabinet__warning">
         <i><MdOutlineError /></i>
-        <span>Необхідно здійснити активацію облікового запису.</span>
+        <p>Необхідно здійснити <a href="http://mail.google.com/mail/." target='_blank'>активацію</a> облікового запису.</p>
       </div> : '' }
       <h1 className="cabinet__title title title-secondary">Персональна інформація</h1>
       <form className="settings-cabinet__form" onSubmit={handleSubmit(onSubmit)} >

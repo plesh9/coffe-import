@@ -6,7 +6,7 @@ import Logo from '../Logo';
 import { scrollUnlock } from '../../tools/subFunctions';
 import { useDispatch, useSelector } from 'react-redux';
 import { setNavbarActive } from '../../state/reducers/navbarReducer';
-import { Link } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 import Avatar from '../Avatar';
 
 
@@ -36,6 +36,10 @@ function Navbar() {
     scrollUnlock()
   };
 
+  const NavbarNavLink = ({ children, className='', to }) => {
+    return <NavLink className={className} to={to} onClick={closeNavbar}>{children}</NavLink>
+  }
+
   return (
     <>
       <div className={`layer ${navbarActive ? 'layer__active' : ''}`}></div>
@@ -46,29 +50,29 @@ function Navbar() {
             <Logo onClick={closeNavbar} />
           </div>
           <div className="navbar__body">
-          {!isAuth &&
-            <div className="navbar__enter">
-              <Link to='/login' className="navbar__login">Вхід</Link>
-              <Link to='/login' state={{registration: true}} className="navbar__sign">Реєстрація</Link>
-            </div> }
-          {isAuth && 
-              <Link to='/cabinet' className='navbar__profile'>
-                <Avatar />
-                <p>{user?.firstname}</p>
-              </Link>
-            }
+            {!isAuth &&
+              <div className="navbar__enter">
+                <NavbarNavLink to='/login' className="navbar__login">Вхід</NavbarNavLink>
+                <NavbarNavLink to='/login' state={{registration: true}} className="navbar__sign">Реєстрація</NavbarNavLink>
+              </div> }
+            {isAuth && 
+                <NavbarNavLink to='/cabinet' className='navbar__profile'>
+                  <Avatar />
+                  <p>{user?.firstname}</p>
+                </NavbarNavLink>
+              }
             <AllcategoryBtn className='navbar__btn' onClick={closeNavbar} />
-            <ul className="navbar__list">
-              <li className="navbar__item"><a className='navbar__link' href="#">Акції</a></li>
-              <li className="navbar__item"><a className='navbar__link' href="#">Дропшипінг</a></li>
-              <li className="navbar__item"><a className='navbar__link' href="#">Доставка | Оплата</a></li>
-              <li className="navbar__item"><a className='navbar__link' href="#">Гарантія | Повернення</a></li>
-              <li className="navbar__item"><a className='navbar__link' href="#">Графік роботи | Контакти</a></li>
-            </ul>
-            <ul className="navbar__list">
-              <li className="navbar__item"><a className='navbar__link' href="#">Онлайн-консультант</a></li>
-              <li className="navbar__item"><a className='navbar__link' href="#">Бот центр | Чат</a></li>
-            </ul>
+             <ul className="navbar__list">
+                <li className="navbar__item"><a className='navbar__link' href="#">Акції</a></li>
+                <li className="navbar__item"><a className='navbar__link' href="#">Дропшипінг</a></li>
+                <li className="navbar__item"><a className='navbar__link' href="#">Доставка | Оплата</a></li>
+                <li className="navbar__item"><a className='navbar__link' href="#">Гарантія | Повернення</a></li>
+                <li className="navbar__item"><a className='navbar__link' href="#">Графік роботи | Контакти</a></li>
+              </ul>
+              <ul className="navbar__list">
+                <li className="navbar__item"><a className='navbar__link' href="#">Онлайн-консультант</a></li>
+                <li className="navbar__item"><a className='navbar__link' href="#">Бот центр | Чат</a></li>
+              </ul>
           </div>
         </div>
       </aside>

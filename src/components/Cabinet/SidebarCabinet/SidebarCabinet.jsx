@@ -1,5 +1,5 @@
 import { NavLink } from "react-router-dom";
-import { cabinetRoutes } from "./linksRoute";
+import { LinksSidebarArray } from "./LinksSidebarArray";
 import LinkSidebar from "./LinkSidebar";
 import ProfileSidebar from "./ProfileSidebar";
 import { IoMdExit } from "react-icons/io";
@@ -8,7 +8,7 @@ function SidebarCabinet({ isOpen, openModal }) {
   return (
     <aside className="cabinet__sidebar sidebar-cabient">
       <ul className="sidebar-cabient__list">
-        {cabinetRoutes?.map((route, i) => (
+        {LinksSidebarArray?.map((route, i) => (
           <li key={i} className={`${route.className ? route.className : ""}`}>
             <NavLink
               to={route.path}

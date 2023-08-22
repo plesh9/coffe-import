@@ -1,33 +1,46 @@
-const SET_NEW_ORDER = 'SET_NEW_ORDER' 
+import { ordersApi } from "../../api/ordersApi"
+
+const SET_ORDER = 'SET_ORDER' 
+const SET_ALL_ORDERS = 'SET_ALL_ORDER' 
 
 const initialState = {
-    orders: []
+    orders: [],
 }
 
 const ordersReducer = (state = initialState, action) => {
     switch (action.type) {     
-        case SET_NEW_ORDER:
-            const newOrder = {
-                contacts: action.contacts,
-                country: action.country,
-                delivery: action.delivery,
-                payment: action.payment,
-                products: action.products,
-                total: action.total,
-                dropTotal: action.dropTotal
-            }
-            console.log(newOrder);
+        case SET_ORDER:
             return {
                 ...state,
-                orders: [...state.orders, newOrder]
+                orders: [action.newOrder, ...state.orders]
             }       
-    
+        case SET_ALL_ORDERS:
+            return {
+                ...state,
+                orders: action.orders
+            } 
+        
         default: return state
     }
 }
 
-export const addNewOrder = (contacts, country, delivery, payment, products, total, dropTotal) => {
-    return {type: SET_NEW_ORDER, contacts, country, delivery, payment, products, total, dropTotal}
+const setOrder = (newOrder) => {
+    return {type: SET_ORDER, newOrder}
+}
+const setOrders = (orders) => {
+    return {type: SET_ALL_ORDERS, orders}
+}
+
+export const addOrder = (newOrder) =>{
+    return dispatch => ordersApi.addOrder(newOrder).then((resp) => {
+        dispatch(setOrder(resp?.data?.newOrder))
+    }).catch(err => console.log(err))
+}
+
+export const getOrders = () =>{
+    return dispatch => ordersApi.getOrders().then((resp) => {
+        dispatch(setOrders(resp?.data))
+    }).catch(err => console.log(err))
 }
 
 export default ordersReducer;

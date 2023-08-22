@@ -8,10 +8,25 @@ import Loader from "../Loader";
 import Logout from "./CabinetRoutes/Logout";
 import "./cabinet.scss";
 import SidebarCabinet from "./SidebarCabinet/SidebarCabinet";
+import { useEffect } from "react";
+import { checkAuth, setLoading } from "../../state/reducers/authReducer";
+import { scrollLock, scrollUnlock } from "../../tools/subFunctions";
 
 function Cabinet() {
   const { onLogout, isLoading } = useAuth();
   const { openModal, closeModal, closeModalOnClickOut, isOpen } = useModal();
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    if (localStorage.getItem('token')){
+      scrollLock();
+      dispatch(setLoading(true));
+      dispatch(checkAuth()).then(() => {
+        scrollUnlock();
+        dispatch(setLoading(false));
+      })
+    }
+  }, [])
 
   if (isLoading) {
     return <Loader />;

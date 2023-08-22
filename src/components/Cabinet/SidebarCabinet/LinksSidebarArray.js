@@ -1,7 +1,9 @@
 import { BsClockHistory, BsFileEarmarkRuled } from "react-icons/bs";
 import { TbFilePencil } from "react-icons/tb";
+import { BiBriefcase } from "react-icons/bi";
 
-export const cabinetRoutes = [
+
+export const LinksSidebarArray = [
   {
     title: "Налаштування",
     path: "/cabinet/personal-information",
@@ -12,6 +14,11 @@ export const cabinetRoutes = [
     title: "Історія замовлень",
     path: "/cabinet/orders",
     icon: <BsClockHistory />,
+  },
+  {
+    title: "Дилерство",
+    path: "/cabinet/dealership",
+    icon: <BiBriefcase />,
   },
   {
     title: "Умови роботи",

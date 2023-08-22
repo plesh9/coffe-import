@@ -333,7 +333,7 @@ main > div > .productList {
 	justify-content: center;
 	width: rem(35);
 	height: rem(35);
-	background: linear-gradient(to top, #09203f 0%, #537895 100%);
+	background: linear-gradient(to top, #09203f 0%, rgb(61, 97, 123) 100%);
 	color: #fff;
 	border-radius: 50%;
 	font-size: rem(23);
@@ -353,7 +353,7 @@ main > div > .productList {
 	& .warning{
 		display: inline-block;
 		position: absolute;
-		left: rem(-10);
+		right: rem(-10);
 		top: rem(-5);
 		display: flex;
 		align-items: center;

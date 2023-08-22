@@ -82,11 +82,10 @@ export const checkAuth = () => {
       dispatch(setAuth(true))
     }) 
     .catch((error) => {
-      // alert(error.response.data.message)
-      // if (localStorage.getItem('token')){
-      //   localStorage.removeItem('token')
-      // }
-      console.log(error)
+      alert(error?.response?.data?.message)
+      if (localStorage.getItem('token')){
+        localStorage.removeItem('token')
+      }
     })
 }
 

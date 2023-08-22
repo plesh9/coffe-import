@@ -2,6 +2,7 @@ import axios from "axios";
 import { authApi } from "../api/authApi";
 
 export const API_URL = "https://proxy-cors-server.onrender.com/api";
+// export const API_URL = "http://localhost:5000/api";
 
 const $api = axios.create({
   withCredentials: true,
