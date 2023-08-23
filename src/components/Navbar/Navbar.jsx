@@ -53,7 +53,7 @@ function Navbar() {
             {!isAuth &&
               <div className="navbar__enter">
                 <NavbarNavLink to='/login' className="navbar__login">Вхід</NavbarNavLink>
-                <NavbarNavLink to='/login' state={{registration: true}} className="navbar__sign">Реєстрація</NavbarNavLink>
+                <NavbarNavLink to='/registration' className="navbar__sign">Реєстрація</NavbarNavLink>
               </div> }
             {isAuth && 
                 <NavbarNavLink to='/cabinet' className='navbar__profile'>

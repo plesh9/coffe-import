@@ -25,5 +25,5 @@ export const LinksSidebarArray = [
     path: "/cabinet/conditions",
     icon: <BsFileEarmarkRuled />,
   },
-  { title: "Подати заяву", path: "/cabinet/applications", icon: <TbFilePencil /> },
+  { title: "Розділ", path: "/cabinet/applications", icon: <TbFilePencil /> },
 ];

@@ -2,7 +2,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { decreaseCartItem, deleteCartItem, increaseCartItem, setCartItemCount, setCartItemDropCount, setInvalidDrop } from "../../state/reducers/cartReducer"
 import CartItem from "./CartItem";
 
-function CartList({ className, drop }) {
+function CartList({ className, drop, isSeller=false }) {
     const dispatch = useDispatch()
     const { cartItems } = useSelector(state => state.cart)  
 
@@ -45,7 +45,7 @@ function CartList({ className, drop }) {
           onIncrease={onIncrease}
           drop={drop}
           key={cartItem.id}
-          isAuth={false}
+          isSeller={isSeller}
         />
       ))}
     </ul>

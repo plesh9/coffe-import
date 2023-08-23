@@ -21,4 +21,12 @@ export const authApi = {
     async update(id, email, firstname, lastname, oldPassword, newPassword) {
         return await $api.put('/update', {id, email, firstname, lastname, oldPassword, newPassword}).catch(error => {throw error})
     },
+
+    async addSeller(email, password, role) {
+        return await $api.put('/add-seller', {email, password, role}).catch(error => {throw error})
+    },
+
+    async addAdmin(email, password, firstname, lastname, key) {
+        return await $api.put('/add-admin', {email, password, firstname, lastname, key}).catch(error => {throw error})
+    },
 }

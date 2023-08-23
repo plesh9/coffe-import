@@ -1,35 +1,11 @@
-import { NavLink } from "react-router-dom";
-import { LinksSidebarArray } from "./LinksSidebarArray";
-import LinkSidebar from "./LinkSidebar";
-import ProfileSidebar from "./ProfileSidebar";
 import { IoMdExit } from "react-icons/io";
+import SidebarPublic from "./SidebarPublic";
 
 function SidebarCabinet({ isOpen, openModal }) {
   return (
     <aside className="cabinet__sidebar sidebar-cabient">
       <ul className="sidebar-cabient__list">
-        {LinksSidebarArray?.map((route, i) => (
-          <li key={i} className={`${route.className ? route.className : ""}`}>
-            <NavLink
-              to={route.path}
-              className={({ isActive }) =>
-                isActive
-                  ? `sidebar-cabient__btn _active ${
-                      route.className ? route.className : ""
-                    }`
-                  : `sidebar-cabient__btn ${
-                      route.className ? route.className : ""
-                    }`
-              }
-            >
-              {route.profile ? (
-                <ProfileSidebar />
-              ) : (
-                <LinkSidebar route={route} />
-              )}
-            </NavLink>
-          </li>
-        ))}
+      <SidebarPublic />
         <li>
           <button
             type="button"

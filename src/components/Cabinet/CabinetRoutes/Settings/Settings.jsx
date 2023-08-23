@@ -4,14 +4,13 @@ import UserFields from "./FieldsSettings/UserFields";
 import { useAuth } from "../../../../hooks/useAuth";
 import Loader from "../../../Loader"
 import {MdOutlineError} from "react-icons/md"
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import PasswordFields from "./FieldsSettings/PasswordFields";
 
 
 function Settings() {
   const { register, handleSubmit, watch, formState: { errors, isValid }, reset } = useForm({ mode: "onBlur" });
   const { user } = useSelector((state) => state.auth);
-  const dispatch = useDispatch()
   const { onUpdate, isLoading } = useAuth()
   const [passwordMode, setPasswordMode] = useState(false)
 

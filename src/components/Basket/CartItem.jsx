@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 
 
 function CartItem({ cartItem, handleFormCount, onBlur, onDelete, onDecrease, 
-    onIncrease, drop, handleDropFormCount, isAuth, onDropFormCountBlur,}) {
+    onIncrease, drop, handleDropFormCount, isSeller, onDropFormCountBlur,}) {
 
   const [dropInvalid, setDropInvalid] = useState(true);
   const [deleteMode, setCartDeleteMode] = useState(false);
@@ -70,7 +70,7 @@ function CartItem({ cartItem, handleFormCount, onBlur, onDelete, onDecrease,
           <span>Видалити</span>
         </button>
       </div>
-      {drop && isAuth ? 
+      {drop && isSeller ? 
         <div className="cart-item__drop">
           <input
             ref={dropInp}

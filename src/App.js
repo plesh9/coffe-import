@@ -23,11 +23,16 @@ import Cabinet from "./components/Cabinet/Cabinet";
 import Settings from "./components/Cabinet/CabinetRoutes/Settings/Settings";
 import Orders from "./components/Cabinet/CabinetRoutes/Orders";
 import Punct from "./components/Cabinet/CabinetRoutes/Punct";
+import { useAuth } from "./hooks/useAuth";
+import Dealership from "./components/Cabinet/CabinetRoutes/Dealership/Dealership";
+import NewDealer from "./components/Cabinet/CabinetRoutes/Dealership/NewDealer/NewDealer";
+import RegisterAdmin from "./components/RegisterAdmin/RegisterAdmin";
 
 function Wrapper() {
   const shop = useSelector(state => state.shop)
   const dispatch = useDispatch()
   const m_12 = useMediaQuery("(min-width: 1201px)");
+  const { verify } = useAuth();
 
   // get shop on load
   useEffect(() => {
@@ -42,9 +47,7 @@ function Wrapper() {
       scrollUnlock()
     })
 
-    if (localStorage.getItem('token')){
-      dispatch(checkAuth())
-    }
+    verify()
     
   }, [])
 
@@ -84,14 +87,17 @@ function Wrapper() {
                 <Route path="/cabinet" element={<Navigate to="/cabinet/personal-information" />} />
                 <Route path="/cabinet/personal-information" element={<Settings />} />
                 <Route path="/cabinet/orders" element={<Orders />} />
-                <Route path="/cabinet/dealership" element={<Punct title='Стати новим дилером' />} />
-                <Route path="/cabinet/applications" element={<Punct title='content 3' />} />
-                <Route path="/cabinet/conditions" element={<Punct title='content 4' />} />
+                <Route path="/cabinet/dealership" element={<Dealership />} />
+                <Route path="/cabinet/applications" element={<Punct title='content 4' />} />
+                <Route path="/cabinet/conditions" element={<Punct title='content 3' />} />
               </Route>
             </Route>
           </Route>
           <Route path="/checkout" element={<Checkout /> } />
           <Route path="/login" element={<Login /> } />
+          <Route path="/registration" element={<Login /> } />
+          <Route path="/new-dealer" element={<NewDealer /> } />
+          <Route path="/new-admin" element={<RegisterAdmin /> } />
       </Routes>
     </div>
   );

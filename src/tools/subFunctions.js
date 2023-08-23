@@ -1,3 +1,5 @@
+import {SELLER} from "../http/roles"
+
 export const scrollLock = () => {
   let body = document.querySelector("body");
   let lock_padding = document.querySelectorAll("[data-lp]");
@@ -26,4 +28,9 @@ export const reduceItem = (array, first, second) => {
   }, 0)
   
   return value
+}
+
+export const isSeller = (user) => {
+  if (user?.role === SELLER) return true
+  return false
 }

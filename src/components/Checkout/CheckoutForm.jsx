@@ -69,11 +69,10 @@ function CheckoutForm({ setIsLoading }) {
             addres: selectedDelivery.Description || selectedDelivery,
             payment: selectedPayRadio,
             products: filterCartItems,
-            total: total,
+            total,
+            dropTotal
         }
-        if (dropTotal > total) {
-            newOrder.dropTotal = dropTotal
-        }
+
         if (user?.id) {
             newOrder.userId = user.id
         }
@@ -88,22 +87,6 @@ function CheckoutForm({ setIsLoading }) {
             dispatch(resetCart())
             dispatch(setSelectedCity(null))
         })
-
-        // sendMail(newOrder).then((resp) => {
-        //     dispatch(addNewOrder(newOrder))
-        // })
-    }
-
-    const sendMail = async (newOrder) => {
-        return await axios.post("http://localhost:5000/send_email", {
-            headers: {
-                Accept: "application/json",
-                "Content-Type": "application/json",
-            },
-            newOrder: newOrder
-        })
-        .then(() => console.log('Message Send Succesfuly'))
-        .catch(() => console.log('Error Message Send'));
     }
 
     return ( 

@@ -7,7 +7,7 @@ const SET_LOADING = "SET_LOADING";
 const initialState = {
   user: null,
   isAuth: false,
-  isLoading: false
+  isLoading: false,
 };
 
 const authReducer = (state = initialState, action) => {
@@ -82,20 +82,39 @@ export const checkAuth = () => {
       dispatch(setAuth(true))
     }) 
     .catch((error) => {
-      alert(error?.response?.data?.message)
       if (localStorage.getItem('token')){
         localStorage.removeItem('token')
-      }
+      } 
+      alert(error.response?.data?.message)
+      return error.response
     })
 }
 
 export const update = ({id, email, firstname, lastname, oldPassword, newPassword}) =>{
-  console.log(email, firstname, lastname, id);
   return dispatch => authApi.update(id, email, firstname, lastname, oldPassword, newPassword).then((response) => {
     if (!response.data) return
 
     dispatch(setUser(response.data.user))
   }) 
+}
+
+export const addSeller = ({email, password, role}) =>{
+  return dispatch => authApi.addSeller(email, password, role).then((response) => {
+    if (!response.data) return
+    dispatch(setUser(response.data.user))
+  }) 
+}
+
+export const addAdmin = (email, password, firstname, lastname, key) =>{
+  return dispatch => authApi.addAdmin(email, password, firstname, lastname, key).then((response) => {
+    console.log(response)
+    if (!response.data) return
+
+    localStorage.setItem('token', response.data.accessToken)
+    dispatch(setUser(response.data.user))
+    dispatch(setUser(response.data.user))
+    dispatch(setAuth(true))
+  })
 }
 
 export default authReducer;

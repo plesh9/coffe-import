@@ -1,14 +1,17 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { toggleInvalidDrop } from "../../state/reducers/cartReducer";
+import { isSeller } from "../../tools/subFunctions";
 import CartList from "../Basket/CartList";
 
 function CheckoutCart() {
   const dispatch = useDispatch();
-  const { total, dropTotal, dropInvalid } = useSelector((state) => state.cart);
-  const isAuth = false
+  const { total, dropTotal, dropInvalid } = useSelector(state => state.cart);
+  const { user } = useSelector(state => state.auth);
+  const seller = isSeller(user)
+
   useEffect(() => {
-    if (!isAuth) {
+    if (!seller) {
       dispatch(toggleInvalidDrop(false))
     }
   }, [])
@@ -16,12 +19,12 @@ function CheckoutCart() {
   return (
     <div className="cart-checkout">
       <h2 className="cart-checkout__title title">Кошик</h2>
-      <CartList className="cart-checkout__list" drop="true" isAuth={isAuth} />
+      <CartList className="cart-checkout__list" drop="true" isSeller={seller} />
       <div className="cart-checkout__total">
         <p>Разом:</p>
         <span>{total} грн</span>
       </div>
-      {isAuth ?
+      {seller ?
         <div className="cart-checkout__total">
           <p>Разом (для покупця):</p>
           {dropInvalid ? 

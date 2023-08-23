@@ -1,9 +1,7 @@
 import { useDispatch, useSelector } from "react-redux";
-import { Link, NavLink, Outlet } from "react-router-dom";
+import { Link, NavLink, Outlet, useLocation } from "react-router-dom";
 import { useAuth } from "../../hooks/useAuth";
 import { useModal } from "../../hooks/useModal";
-import { useTabs } from "../../hooks/useTabs";
-import { useUsers } from "../../hooks/useUsers";
 import Loader from "../Loader";
 import Logout from "./CabinetRoutes/Logout";
 import "./cabinet.scss";
@@ -13,19 +11,11 @@ import { checkAuth, setLoading } from "../../state/reducers/authReducer";
 import { scrollLock, scrollUnlock } from "../../tools/subFunctions";
 
 function Cabinet() {
-  const { onLogout, isLoading } = useAuth();
+  const { onLogout, isLoading, verify } = useAuth();
   const { openModal, closeModal, closeModalOnClickOut, isOpen } = useModal();
-  const dispatch = useDispatch();
 
   useEffect(() => {
-    if (localStorage.getItem('token')){
-      scrollLock();
-      dispatch(setLoading(true));
-      dispatch(checkAuth()).then(() => {
-        scrollUnlock();
-        dispatch(setLoading(false));
-      })
-    }
+    verify()
   }, [])
 
   if (isLoading) {

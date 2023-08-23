@@ -4,28 +4,26 @@ import "./login.scss";
 import Loader from "../Loader"
 import Logo from "../Logo"
 import { useForm } from "react-hook-form";
-import RegisterFrom from "./Forms/RegisterFrom";
-import LoginFrom from "./Forms/LoginFrom";
+import RegisterFrom from "./Forms/RegisterForm";
+import LoginFrom from "./Forms/LoginForm";
 import { useAuth } from "../../hooks/useAuth";
-import { useLocation } from "react-router-dom";
+import { NavLink, useLocation } from "react-router-dom";
+import { useEffect } from "react";
 
 function Login() {
   const location = useLocation()
-  const [registerMode, setRegisterMode] = useState(location?.state?.registration || false)
+  const [registerMode, setRegisterMode] = useState(location?.pathname === '/registration')
   const { register, handleSubmit, watch, formState: { errors, isValid }, reset } = useForm({mode: "onBlur"});
   const { onLogin, onRegister, isLoading } = useAuth()
 
-  const changeMode = () => {
-    setRegisterMode(prevMode => !prevMode)
-    reset()
-  }
+  useEffect(() => {
+    setRegisterMode(location?.pathname === '/registration')
+  }, [location.pathname])
 
   function onSubmit(data) {
     if (data.confirmPassword) {
-      onRegister(data)
-      return
+      return onRegister(data)
     }
-    
     onLogin(data)
   }
 
@@ -40,8 +38,10 @@ function Login() {
           <Logo className='login__logo' />
           <h1 className="login__title">{registerMode ? 'Реєстрація' : 'Вхід'}</h1>
           <p className="login__subtitle">
-            {registerMode ? 'Створіть обліковий запис та отримайте доступ до особистого кабінету.' : 
-            'Авторизуйтеся, щоб отримати доступ до вашого облікового запису.'}
+            {registerMode 
+              ? 'Створіть обліковий запис та отримайте доступ до особистого кабінету.' 
+              : 'Авторизуйтеся, щоб отримати доступ до вашого облікового запису.'
+            }
           </p>
           <div className="login__fields">
           {registerMode ? 
@@ -58,9 +58,10 @@ function Login() {
           </div>
           <p className="login__redirect">
             {registerMode ? 'Вже маєте обліковий запис?' : 'Відсутній обліковий запис?'} <br />
-            <button type="button" onClick={changeMode}>
-              {registerMode ? 'Увійти!' : 'Зареєструйтеся!'}
-            </button>
+            {registerMode 
+              ? <NavLink to='/login'>Увійти!</NavLink>
+              : <NavLink to='/registration'>Зареєструйтеся!</NavLink>
+            }
           </p>
         </form>
       </div>
