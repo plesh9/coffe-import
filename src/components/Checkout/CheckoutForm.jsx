@@ -60,6 +60,7 @@ function CheckoutForm({ setIsLoading }) {
                 return item
             }
             delete item.dropPrice
+            return item
         })
 
         const newOrder = {
@@ -76,6 +77,7 @@ function CheckoutForm({ setIsLoading }) {
         if (user?.id) {
             newOrder.userId = user.id
         }
+        console.log(filterCartItems)
 
         scrollLock()
         setIsLoading(true)

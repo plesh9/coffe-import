@@ -2,6 +2,8 @@ import { FiMoreVertical } from "react-icons/fi"
 import { RiDeleteBin7Line } from "react-icons/ri"
 import { useRef } from "react";
 import { useEffect, useState } from "react";
+import { NavLink } from "react-router-dom";
+import { useCart } from "../../hooks/useCart";
 
 
 function CartItem({ cartItem, handleFormCount, onBlur, onDelete, onDecrease, 
@@ -10,9 +12,10 @@ function CartItem({ cartItem, handleFormCount, onBlur, onDelete, onDecrease,
   const [dropInvalid, setDropInvalid] = useState(true);
   const [deleteMode, setCartDeleteMode] = useState(false);
   const dropInp = useRef(null);
+  const { closeCart } = useCart()
 
   useEffect(() => {
-    if (dropInp?.current?.value < 675) {
+    if (+dropInp?.current?.value < +cartItem.price) {
       setDropInvalid(true);
     } else {
       setDropInvalid(false);
@@ -38,7 +41,7 @@ function CartItem({ cartItem, handleFormCount, onBlur, onDelete, onDecrease,
   function onDropBlur(e) {
     onDropFormCountBlur(e, cartItem);
 
-    if (e.target.value < 675) {
+    if (+e.target.value < +cartItem.price) {
       setDropInvalid(true);
     } else {
       setDropInvalid(false);
@@ -47,10 +50,10 @@ function CartItem({ cartItem, handleFormCount, onBlur, onDelete, onDecrease,
 
   return (
     <li className="cart-item">
-      <div className="cart-item__img cart-item__img-ibg">
+      <NavLink to={`/product/${cartItem.id}`} onClick={closeCart} className="cart-item__img cart-item__img-ibg">
         <img src={cartItem.imgUrl} />
-      </div>
-      <span className="cart-item__title">{cartItem.title}</span>
+      </NavLink>
+      <NavLink to={`/product/${cartItem.id}`} className="cart-item__title" onClick={closeCart}>{cartItem.title}</NavLink>
       <BasketQuantityForm
         cartItem={cartItem}
         onBlur={onBlur}
@@ -84,7 +87,7 @@ function CartItem({ cartItem, handleFormCount, onBlur, onDelete, onDecrease,
           {dropInvalid ? 
             <div className="cart-item__drop-error">
               <p>Мінімальна ціна</p>
-              <span>675 грн за шт.</span>
+              <span>{cartItem.price} грн за шт.</span>
             </div> : ''}
         </div>: ''}
     </li>

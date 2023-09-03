@@ -1,4 +1,6 @@
-function CardItem({ currentItem, onByProduct }) {
+import { NavLink } from "react-router-dom";
+
+function CardItem({ currentItem, handleAddToCart }) {
   return (
       <div className="cards-main__item">
         <div className="cards-main__actions">
@@ -9,14 +11,14 @@ function CardItem({ currentItem, onByProduct }) {
             Топ продажу
           </div>
         </div>
-        <a href="#" className="cards-main__img">
+        <NavLink to={`/product/${currentItem.id}`} className="cards-main__img">
           <img src={currentItem?.imgUrl} alt="" />
-        </a>
-        <a href="#" className="cards-main__title">
+        </NavLink>
+        <NavLink to={`/product/${currentItem.id}`} className="cards-main__title">
           <span>{currentItem?.title}</span>
-        </a>
+        </NavLink>
         <div className="cards-main__info">
-          <p>{currentItem?.description}</p>
+          <NavLink to={`/product/${currentItem.id}`}>{currentItem?.description}</NavLink>
         </div>
         <div className="cards-main__box">
           <div className="cards-main__rating">
@@ -32,13 +34,13 @@ function CardItem({ currentItem, onByProduct }) {
         </div>
         <div className="cards-main__prices">
           <div className="cards-main__price cards-main__price-old">
-            {currentItem?.price} ₴
+            {Math.ceil( +currentItem.price - +currentItem?.price / 100 * 20)} ₴
           </div>
           <div className="cards-main__price cards-main__price-new">
             {currentItem?.price} ₴
           </div>
         </div>
-        <button className="cards-main__btn btn" onClick={() => onByProduct(currentItem)}>Купити</button>
+        <button className="cards-main__btn btn" onClick={() => handleAddToCart(currentItem)}>Купити</button>
       </div>
   );
 }

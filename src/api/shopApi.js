@@ -1,7 +1,17 @@
 import axios from "axios"
+import $api, { API_URL } from "../http"
 
 // const SHOP_URL = "https://proxy-cors-server.onrender.com/shop"
 const SHOP_URL = `http://localhost:5000/shop`
+
+// export const shopApi = {
+//   async getShop(){
+//       return axios.get(`${API_URL}/products?setCategory=true`).then((resp) => {
+
+//           return resp.data
+//       })
+//   }
+// }
 
 export const shopApi = {
   async getShop(){
@@ -20,24 +30,25 @@ export const shopApi = {
 }
 
 function parseXmlProductToArray(data) {
-  const productList = data.querySelectorAll("item");
+  const productList = data.querySelectorAll("offer");
   const productArray = [];
 
   productList.forEach((el) => {
-    // console.log(el)
+    console.log(el)
     productArray.push({
       title: el.querySelector('name').textContent,
       price: el.querySelector('price').textContent,
       // currency: el.querySelector('currencyId').textContent,
-      imgUrl: el.querySelector('image').textContent,
-      // imgUrl: el.querySelector('picture').textContent,
+      // imgUrl: el.querySelector('image').textContent,
+      imgUrl: el.querySelector('picture').textContent,
+      vendorCode: el.querySelector('vendorCode').textContent,
       vendor: el.querySelector('vendor').textContent,
       description: el.querySelector('description').textContent.replace(/^\n/,''),
       // quantity_in_stock: el.querySelector('quantity_in_stock').textContent,
       categoryId: el.querySelector("categoryId").textContent,
       id: el.getAttribute("id"),
       available: el.getAttribute("available"),
-      // params: getParams(el)
+      params: getParams(el)
     })
 
     function getParams(el) {

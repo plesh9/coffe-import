@@ -18,6 +18,7 @@ function Login() {
 
   useEffect(() => {
     setRegisterMode(location?.pathname === '/registration')
+    reset()
   }, [location.pathname])
 
   function onSubmit(data) {

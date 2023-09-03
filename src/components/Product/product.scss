@@ -1,0 +1,339 @@
+@import "../../Styles/scss/style";
+
+.product {
+    margin-top: rem(10);
+    &__title {
+        margin: 0;
+        max-width: rem(600);
+        margin-bottom: rem(15);
+    }
+    &__wrapper {
+        margin-top: rem(25);
+    }
+    &__content {
+        display: grid;
+        grid-template-columns: max-content 1fr;
+        column-gap: rem(100);
+        align-items: flex-start;
+        @media (max-width: em(1440)) {
+            column-gap: rem(50);
+        }
+        @media (max-width: $tablet) {
+            grid-template-columns: 1fr;
+        }
+    }
+    &__img {
+        @media (max-width: $tablet) {
+            margin: 0 auto rem(15);
+        }
+        & img {
+            width: rem(440);
+            height: rem(440);
+            object-fit: cover;
+            @media (max-width: em(1440)) {
+                @include adaptiveValue("width", 400, 290, 479.98, 320, 1);
+                @include adaptiveValue("height", 400, 290, 479.98, 320, 1);
+            }
+        }
+    }
+    &__wrap {
+        border: 1px solid #e9e9e9;
+        padding: rem(15) rem(20);
+        &:not(:last-child) {
+            margin-bottom: rem(15);
+        }
+        @media (max-width:$mobileSmall){
+             padding: rem(15); 
+        }
+        @media (max-width: em(374)){
+             padding: rem(15) rem(10); 
+        }
+    }
+    &__buy {
+        display: flex;
+        align-items: center;
+        column-gap: rem(25);
+        row-gap: rem(15);
+        @media (max-width: $tablet) {
+            display: grid;
+            grid-template-columns: max-content max-content 1fr;
+            column-gap: rem(50);
+        }
+        @media (max-width:$mobile){
+            column-gap: rem(25);
+             grid-template-columns: 1fr 1fr;
+             justify-content: center; 
+        }
+        @media (max-width:$mobileSmall){
+            column-gap: rem(15);
+        }
+        @media (max-width: em(374)){
+            column-gap: rem(10);
+            padding: rem(15) rem(10); 
+       }
+    }
+    &__price {
+        white-space: nowrap;
+        &-old {
+            text-decoration: line-through;
+            font-size: rem(14);
+            color: #999;
+        }
+        &-current {
+            color: $red;
+            font-size: rem(28);
+            @media (max-width:$mobileSmall){
+                font-size: rem(24); 
+            }
+            @media (max-width: em(374)){
+                font-size: rem(18); 
+            }
+        }
+    }
+    &__btn {
+        width: fit-content;
+        padding: rem(10) rem(50);
+        @media (max-width: $tablet) {
+            width: 100%;
+            max-width: rem(440);
+            margin: 0 auto;
+        }
+        @media (max-width: $mobile) {
+            grid-column: span 2;
+            max-width: 100%;
+        }
+        @media (max-width:$mobileSmall){
+        }
+    }
+    &__more {
+        margin-top: rem(30);
+    }
+    &__block {
+        &:not(:last-child) {
+            padding-bottom: rem(25);
+            margin-bottom: rem(25);
+            border-bottom: 1px solid #e9e9e9;
+        }
+    }
+    &__subtitle {
+        font-weight: 500;
+        color: #161616;
+        font-size: rem(21);
+        max-width: rem(800);
+    }
+    &__description {
+        font-size: rem(14);
+        line-height: 142.857143%; /* 20/14 */
+        margin-top: rem(10);
+    }
+}
+.nav-product {
+    overflow-x: auto;
+    overflow-y: hidden;
+    border-bottom: 1px solid #e9e9e9;
+    &::-webkit-scrollbar{
+        width: 0;
+        height: 0;
+    }
+    &__list {
+        display: flex;
+        align-items: center;
+        column-gap: rem(30);
+    }
+    &__btn {
+        position: relative;
+        white-space: nowrap;
+        padding: rem(12) 0;
+        transition: all 0.2s ease;
+        @media (max-width:$mobile){
+            //  padding: rem(6) 0; 
+            font-size: rem(12);
+        }
+        &::before {
+            content: "";
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 0;
+            height: rem(1);
+            background-color: $accentColor;
+            transition: all 0.2s ease;
+        }
+        @media (any-hover: hover) {
+            &:hover {
+                color: $accentColor;
+                &::before {
+                    width: 100%;
+                }
+            }
+        }
+        &:active {
+            color: $accentColor;
+        }
+        &-active {
+            color: $accentColor;
+            &::before {
+                width: 100%;
+            }
+        }
+    }
+}
+.sell-product {
+    max-width: rem(180);
+    &__info {
+        background-color: #f2f2f2;
+        padding: rem(10) rem(15);
+        border-radius: rem(50);
+        font-size: rem(12);
+        line-height: 1.2;
+        text-align: center;
+    }
+    &__status {
+        font-weight: 400;
+        font-size: rem(12);
+        background: $accentColor;
+        color: #fff;
+        padding: rem(6) rem(15);
+        border-radius: rem(50);
+        margin-top: rem(5);
+        display: flex;
+        align-items: center;
+        text-align: center;
+        justify-content: center;
+        column-gap: rem(5);
+        white-space: nowrap;
+        &::before {
+            content: "✓";
+            font-size: rem(13);
+        }
+    }
+}
+.characters-product {
+    display: grid;
+    column-gap: rem(50);
+    row-gap: rem(20);
+    grid-template-columns: repeat(2, 1fr);
+    margin-top: rem(20);
+    @media (max-width:$mobile){
+         grid-template-columns: 1fr; 
+    }
+    &__item {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-end;
+    }
+    &__name {
+        font-weight: 500;
+        font-size: rem(14);
+    }
+    &__value {
+        min-width: rem(100);
+        text-align: right;
+        font-size: rem(14);
+    }
+}
+.delivery-product {
+    &__title {
+        display: flex;
+        justify-content: space-between;
+        & > span {
+            font-weight: 500;
+            font-size: rem(16);
+            color: #161616;
+        }
+    }
+    &__details {
+        color: $accentColor;
+        font-size: rem(14);
+        @media (any-hover: hover) {
+            &:hover {
+                text-decoration: underline;
+            }
+        }
+    }
+    &__methods {
+        margin-top: rem(20);
+    }
+    &__method {
+        display: flex;
+        align-items: center;
+        column-gap: rem(10);
+        font-size: rem(14);
+        color: #858585;
+        &:not(:last-child) {
+            margin-bottom: rem(10);
+        }
+        & i {
+            display: inline-block;
+            & svg {
+                color: #858585;
+                width: rem(24);
+                height: rem(24);
+            }
+        }
+        & p {
+            flex: 1 1 auto;
+        }
+        & span{
+            @media (max-width:$mobileSmall){
+                 display: none; 
+            }
+        }
+    }
+}
+.details-product {
+    &__title {
+        font-weight: 500;
+        font-size: rem(14);
+        color: #161616;
+    }
+    &__item {
+        display: flex;
+        align-items: center;
+        column-gap: rem(10);
+        color: #858585;
+        font-size: rem(14);
+        line-height: 1.2;
+        &:not(:last-child) {
+            margin-bottom: rem(10);
+            padding-bottom: rem(10);
+            border-bottom: 1px solid #e9e9e9;
+        }
+        & i {
+            & svg {
+                width: rem(24);
+                height: rem(24);
+            }
+        }
+        & span {
+        }
+    }
+}
+.rating-product {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: rem(15);
+    &__block {
+        display: flex;
+        align-items: center;
+        column-gap: rem(10);
+        @media (max-width:$mobileSmall){
+             flex-direction: column; 
+             align-items: flex-start;
+             row-gap: rem(5);
+        }
+    }
+    &__response {
+        color: $accentColor;
+        font-size: rem(14);
+        @media (any-hover: hover) {
+            &:hover {
+                text-decoration: underline;
+            }
+        }
+    }
+    &__code {
+        font-size: rem(12);
+    }
+}

@@ -59,6 +59,7 @@ const cartReducer = (state = initialState, action) => {
                     if (item.id === cartItem.id){
                         item.count += 1
                         item.totalPrice = item.price * item.count 
+                        item.dropPrice = item.dropPrice * item.count 
                         return item
                     }
                     return item
@@ -71,7 +72,7 @@ const cartReducer = (state = initialState, action) => {
             }
             function knowDrop() {
                 for (let i = 0; i <= currentItems.length; i += 1) {
-                    if (parseInt(currentItems[i]?.dropPrice) < 675) {
+                    if (+currentItems[i]?.dropPrice < +currentItems[i]?.price) {
                       return true;
                     }
                   }
@@ -82,7 +83,7 @@ const cartReducer = (state = initialState, action) => {
                 dropInvalid:  knowDrop(),
                 cartItems: currentItems,
                 total: currentItems.reduce((prev, curr) => { return parseInt(prev) + parseInt(curr.totalPrice)}, 0),
-                dropTotal: currentItems.reduce((prev, curr) => { return parseInt(prev) + (parseInt(curr.totalPrice) + parseInt(curr.dropPrice))}, 0),
+                dropTotal: currentItems.reduce((prev, curr) => { return parseInt(prev) + parseInt(curr.dropPrice)}, 0),
                 count: currentItems.reduce((prev, curr) => { return parseInt(prev) + parseInt(curr.count)}, 0)
             }
         case DELETE_CART_ITEM:
@@ -92,7 +93,7 @@ const cartReducer = (state = initialState, action) => {
                 ...state,
                 cartItems: newCartArray,
                 total: newCartArray.reduce((prev, curr) => { return parseInt(prev) + parseInt(curr.totalPrice)}, 0),
-                dropTotal: newCartArray.reduce((prev, curr) => { return parseInt(prev) + (parseInt(curr.totalPrice) + parseInt(curr.dropPrice))}, 0),
+                dropTotal: newCartArray.reduce((prev, curr) => { return parseInt(prev) + parseInt(curr.dropPrice) * (+curr.count < 1 ? 1 : +curr.count)}, 0),
                 count: newCartArray.reduce((prev, curr) => { return parseInt(prev) + parseInt(curr.count)}, 0)
             }
         case SET_CART_ITEM_COUNT:
@@ -115,7 +116,7 @@ const cartReducer = (state = initialState, action) => {
             return {
                 ...state,
                 total: updateArray.reduce((prev, curr) => { return parseInt(prev) + parseInt(curr.totalPrice)}, 0),
-                dropTotal: updateArray.reduce((prev, curr) => { return parseInt(prev) + (parseInt(curr.totalPrice) + parseInt(curr.dropPrice) * parseInt(curr.count ? curr.count : 1 ))}, 0),
+                dropTotal: updateArray.reduce((prev, curr) => { return parseInt(prev) + (+curr.dropPrice * (+curr.count < 1 ? 1 : +curr.count)) }, 0),
                 count: updateArray.reduce((prev, curr) => {
                     let s = curr.count
                     if (s < 1){
@@ -137,7 +138,7 @@ const cartReducer = (state = initialState, action) => {
                 ...state,
                 cartItems: decreaseArray,
                 total: decreaseArray.reduce((prev, curr) => { return parseInt(prev) + parseInt(curr.totalPrice)}, 0),
-                dropTotal: decreaseArray.reduce((prev, curr) => { return parseInt(prev) + (parseInt(curr.totalPrice) + parseInt(curr.dropPrice) * parseInt(curr.count))}, 0),
+                dropTotal: decreaseArray.reduce((prev, curr) => { return parseInt(prev) + (+curr.dropPrice * +curr.count)}, 0),
                 count: decreaseArray.reduce((prev, curr) => { return parseInt(prev) + parseInt(curr.count)}, 0)
             }
         case INCREASE_CART_ITEM_COUNT:
@@ -153,7 +154,7 @@ const cartReducer = (state = initialState, action) => {
                 ...state,
                 cartItems: increaseArray,
                 total: increaseArray.reduce((prev, curr) => { return parseInt(prev) + parseInt(curr.totalPrice)}, 0),
-                dropTotal: increaseArray.reduce((prev, curr) => { return parseInt(prev) + (parseInt(curr.totalPrice) + parseInt(curr.dropPrice) * parseInt(curr.count))}, 0),
+                dropTotal: increaseArray.reduce((prev, curr) => { return parseInt(prev) + (+curr.dropPrice * +curr.count) }, 0),
                 count: increaseArray.reduce((prev, curr) => { return parseInt(prev) + parseInt(curr.count)}, 0)
             }
         case SET_CART_ITEM_DROP_COUNT:
@@ -177,7 +178,7 @@ const cartReducer = (state = initialState, action) => {
             })
             function knowVal() {
                 for (let i = 0; i <= dropArray.length; i += 1) {
-                    if (dropArray[i]?.dropPrice < 675) {
+                    if (+dropArray[i]?.dropPrice < +dropArray[i]?.price) {
                       return true;
                     }
                   }
@@ -186,7 +187,7 @@ const cartReducer = (state = initialState, action) => {
             return {
                 ...state,
                 dropInvalid:  knowVal(),
-                dropTotal: dropArray.reduce((prev, curr) => { return parseInt(prev) + (parseInt(curr.totalPrice) + parseInt(curr.dropPrice) * parseInt(curr.count))}, 0),
+                dropTotal: dropArray.reduce((prev, curr) => { return parseInt(prev) + parseInt(curr.dropPrice) * parseInt(curr.count)}, 0),
 
             }
         case TOGGLE_INVALID_DROP:

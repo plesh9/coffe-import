@@ -6,6 +6,8 @@ const SET_CURRENT_CATALOG = 'SET_CURRENT_CATALOG'
 const SET_CURRENT_CATEGORY = 'SET_CURRENT_CATEGORY'
 const SET_FILTER_PRODUCTS = 'SET_FILTER_PRODUCTS'
 const SET_IS_LOADING = 'SET_IS_LOADING'
+const SET_TOTAL_PRODUCT = 'SET_TOTAL_PRODUCT'
+const SET_TOTAL_CATEGORY = 'SET_TOTAL_CATEGORY'
 
 let initialState = {
     products: [],
@@ -16,7 +18,9 @@ let initialState = {
     filterProducts: [],
     currentCategory: null,
     currentCatalog: null,
-    isLoading: true
+    isLoading: true,
+    totalProduct: 0,
+    totalCategory: 0
 }
 
 const shopReducer = (state = initialState, action) => {
@@ -51,6 +55,16 @@ const shopReducer = (state = initialState, action) => {
                 ...state,
                 isLoading: action.state
             }
+        case SET_TOTAL_PRODUCT:
+            return  {
+                ...state,
+                totalProduct: action.total
+            }
+        case SET_TOTAL_CATEGORY:
+            return  {
+                ...state,
+                totalCategory: action.total
+            }
             
         default: return state
     }
@@ -63,8 +77,14 @@ const setProducts = (products) => {
 const setCategories = (categories) => {
     return { type: SET_CATEGORIES, categories }
 }
+const setTotalProduct = (total) => {
+    return { type: SET_TOTAL_PRODUCT, total }
+}
+const setTotalCategory = (total) => {
+    return { type: SET_TOTAL_CATEGORY, total }
+}
 export const getShop = () =>{
-    return dispatch => shopApi.getShop().then(({products, categories}) => {
+    return dispatch => shopApi.getShop().then(({products, totalProduct, categories, totalCategories}) => {
         dispatch(setProducts(products))
         dispatch(setCategories(categories))
     }) 

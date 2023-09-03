@@ -11,7 +11,7 @@ function BecomeDealer() {
         ЯК СТАТИ НОВИМ ПАРТНЕРОМ ІНТЕРНЕТ МАГАЗИНУ COFFE IMPORT?
       </h1>
       <h2 className="dealership__subtitle">
-        На початку співпраці з нами, на умовах дропшипінгу, вам потрібно:
+        На початку співпраці з нами, вам потрібно:
       </h2>
       <ul className="dealership__list">
         <li>

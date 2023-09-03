@@ -27,6 +27,10 @@ import { useAuth } from "./hooks/useAuth";
 import Dealership from "./components/Cabinet/CabinetRoutes/Dealership/Dealership";
 import NewDealer from "./components/Cabinet/CabinetRoutes/Dealership/NewDealer/NewDealer";
 import RegisterAdmin from "./components/RegisterAdmin/RegisterAdmin";
+import Product from "./components/Product/Product";
+import ProductAll from "./components/Product/Navigation/ProductAll";
+import ProductCharacter from "./components/Product/Navigation/ProductCharacter";
+
 
 function Wrapper() {
   const shop = useSelector(state => state.shop)
@@ -34,7 +38,6 @@ function Wrapper() {
   const m_12 = useMediaQuery("(min-width: 1201px)");
   const { verify } = useAuth();
 
-  // get shop on load
   useEffect(() => {
     scrollLock()
     dispatch(setIsLoading(true));
@@ -48,26 +51,10 @@ function Wrapper() {
     })
 
     verify()
-    
+
   }, [])
 
-  // useEffect(() => {
-  //   axios({
-  //     method: 'post',
-  //     url: `http://localhost:5000/api/login`,
-  //     // withCredentials: true,
-  //     params: {},
-  //     data: JSON.stringify({
-  //       email: 'game.plesh9@gmail.com',
-  //       password: '12345678'
-  //     }),
-  //     headers: {
-  //       "Content-Type": "application/json",
-  //       'Access-Control-Allow-Credentials':true
-  //     }
-  //   }).then(response => console.log(response))
-  // }, [])
-
+  
   if (shop.isLoading) {
     return <Loader />
   }
@@ -80,6 +67,10 @@ function Wrapper() {
             <Route path="/catalog" element={<CatalogList itemsPerPage={32} pagination={true} />} />
             <Route path="/catalog/:catalogPath" element={<CategotyList itemsPerPage={32} pagination={true} />} />
             <Route path="/catalog/:catalogPath/:categoryId" element={<PaginatedItems itemsPerPage={m_12 ? 32 : 16} pagination={true} />} />
+            <Route element={<Product />}>
+              <Route path="/product/:productId/characteristics" element={<ProductCharacter title="true" />} />
+              <Route path="/product/:productId" element={<ProductAll />} end={true}/>
+            </Route>
             <Route path="/thanks" element={<Thanks /> } />
             <Route path="*" element={<NotFound title="На жаль, такої сторінки немає :(" /> } />
             <Route element={<PrivateRoute /> }>

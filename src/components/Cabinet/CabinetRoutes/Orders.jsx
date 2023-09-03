@@ -23,17 +23,14 @@ function Orders() {
     console.log(orders)
 
     const getDate = (string)  => {
-        const parts = string.split(" ");
-        const day = parts[2];
-        const month = parts[1];
-        const year = parts[3];
-        const time = parts[4];
-        console.log("Дата:", `${day} ${month} ${year}`);
-        console.log("Час:", time);
+        const parts = string.split(', ');
+        const datePart = parts[0];
+        const timePart = parts[1];
+
         return (
             <>
-                <li>{`Дата: ${day} ${month} ${year}`}</li>
-                <li>{`Час: ${time}`}</li>
+                <li>{`Дата: ${datePart}`}</li>
+                <li>{`Час: ${timePart}`}</li>
             </>
         )
     }
@@ -89,10 +86,10 @@ function Orders() {
                                     <img src={el.imgUrl} />
                                     <span>{el.title}</span>
                                 </li>
-                                <li>Ціна за одиницю: ${el.price}грн</li>
+                                <li>Ціна за одиницю: {el.price}грн</li>
                                 <li>Кількість: {el.count}шт</li>
-                                {el.dropPrice ? <li>Націнка: {el.dropPrice}грн за одиницю</li> : ''}
-                                <li>Всього за товар: ${parseInt(el.totalPrice) + parseInt(el.dropPrice || 1 * el.count)}грн</li>
+                                {el.dropPrice ? <li>Ціна з націнкою: {el.dropPrice}грн за одиницю</li> : ''}
+                                <li>Всього за товар: {el.dropPrice ? +el.dropPrice * +el.count : el.totalPrice}грн</li>
                             </ul>
                             )
                         })}
