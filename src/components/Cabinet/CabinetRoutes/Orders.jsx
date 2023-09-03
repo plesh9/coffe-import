@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { NavLink } from "react-router-dom";
 import { getOrders, setLoading } from "../../../state/reducers/ordersReducer";
 import { scrollLock, scrollUnlock } from "../../../tools/subFunctions";
 import Loader from "../../Loader"
@@ -83,8 +84,10 @@ function Orders() {
                             return (
                             <ul className="history-orders__products history-orders__list" key={i}>
                                 <li className="history-orders__box">
-                                    <img src={el.imgUrl} />
-                                    <span>{el.title}</span>
+                                    <NavLink to={`/product/${el.id}`}>
+                                        <img src={el.imgUrl} />
+                                    </NavLink>
+                                    <NavLink to={`/product/${el.id}`}>{el.title}</NavLink>
                                 </li>
                                 <li>Ціна за одиницю: {el.price}грн</li>
                                 <li>Кількість: {el.count}шт</li>

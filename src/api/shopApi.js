@@ -1,8 +1,8 @@
 import axios from "axios"
 import $api, { API_URL } from "../http"
 
-// const SHOP_URL = "https://proxy-cors-server.onrender.com/shop"
-const SHOP_URL = `http://localhost:5000/shop`
+const SHOP_URL = "https://proxy-cors-server.onrender.com/shop"
+// const SHOP_URL = `http://localhost:5000/shop`
 
 // export const shopApi = {
 //   async getShop(){

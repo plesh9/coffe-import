@@ -1,4 +1,5 @@
 import { NavLink } from "react-router-dom";
+import CustomRating from "../Ratings/CustomRating";
 
 function CardItem({ currentItem, handleAddToCart }) {
   return (
@@ -21,13 +22,7 @@ function CardItem({ currentItem, handleAddToCart }) {
           <NavLink to={`/product/${currentItem.id}`}>{currentItem?.description}</NavLink>
         </div>
         <div className="cards-main__box">
-          <div className="cards-main__rating">
-            <span className="cards-main__star cards-main__star-active"></span>
-            <span className="cards-main__star cards-main__star-active"></span>
-            <span className="cards-main__star cards-main__star-active"></span>
-            <span className="cards-main__star cards-main__star-active"></span>
-            <span className="cards-main__star"></span>
-          </div>
+          <CustomRating className="cards-main__rating"/>
           <a href="#" className="cards-main__response">
             Написати відгук
           </a>

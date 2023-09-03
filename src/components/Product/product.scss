@@ -23,17 +23,23 @@
         }
     }
     &__img {
+        position: static;
+        width: rem(440);
+        height: rem(440);
+        @media (max-width: em(1440)) {
+            @include adaptiveValue("width", 400, 290, 479.98, 320, 1);
+            @include adaptiveValue("height", 400, 290, 479.98, 320, 1);
+        }
         @media (max-width: $tablet) {
             margin: 0 auto rem(15);
         }
-        & img {
-            width: rem(440);
-            height: rem(440);
-            object-fit: cover;
-            @media (max-width: em(1440)) {
-                @include adaptiveValue("width", 400, 290, 479.98, 320, 1);
-                @include adaptiveValue("height", 400, 290, 479.98, 320, 1);
-            }
+    }
+    &__magnify{
+        width: 100% !important;
+        height: 100% !important;
+        & > img{
+            height: 100% !important;
+            object-fit: contain;
         }
     }
     &__wrap {
@@ -42,11 +48,11 @@
         &:not(:last-child) {
             margin-bottom: rem(15);
         }
-        @media (max-width:$mobileSmall){
-             padding: rem(15); 
+        @media (max-width: $mobileSmall) {
+            padding: rem(15);
         }
-        @media (max-width: em(374)){
-             padding: rem(15) rem(10); 
+        @media (max-width: em(374)) {
+            padding: rem(15) rem(10);
         }
     }
     &__buy {
@@ -59,18 +65,18 @@
             grid-template-columns: max-content max-content 1fr;
             column-gap: rem(50);
         }
-        @media (max-width:$mobile){
+        @media (max-width: $mobile) {
             column-gap: rem(25);
-             grid-template-columns: 1fr 1fr;
-             justify-content: center; 
+            grid-template-columns: 1fr 1fr;
+            justify-content: center;
         }
-        @media (max-width:$mobileSmall){
+        @media (max-width: $mobileSmall) {
             column-gap: rem(15);
         }
-        @media (max-width: em(374)){
+        @media (max-width: em(374)) {
             column-gap: rem(10);
-            padding: rem(15) rem(10); 
-       }
+            padding: rem(15) rem(10);
+        }
     }
     &__price {
         white-space: nowrap;
@@ -82,11 +88,11 @@
         &-current {
             color: $red;
             font-size: rem(28);
-            @media (max-width:$mobileSmall){
-                font-size: rem(24); 
+            @media (max-width: $mobileSmall) {
+                font-size: rem(24);
             }
-            @media (max-width: em(374)){
-                font-size: rem(18); 
+            @media (max-width: em(374)) {
+                font-size: rem(18);
             }
         }
     }
@@ -102,7 +108,7 @@
             grid-column: span 2;
             max-width: 100%;
         }
-        @media (max-width:$mobileSmall){
+        @media (max-width: $mobileSmall) {
         }
     }
     &__more {
@@ -131,7 +137,7 @@
     overflow-x: auto;
     overflow-y: hidden;
     border-bottom: 1px solid #e9e9e9;
-    &::-webkit-scrollbar{
+    &::-webkit-scrollbar {
         width: 0;
         height: 0;
     }
@@ -142,17 +148,19 @@
     }
     &__btn {
         position: relative;
+        display: inline-block;
         white-space: nowrap;
         padding: rem(12) 0;
         transition: all 0.2s ease;
-        @media (max-width:$mobile){
-            //  padding: rem(6) 0; 
+        @media (max-width: $mobile) {
+            //  padding: rem(6) 0;
             font-size: rem(12);
         }
         &::before {
             content: "";
             position: absolute;
-            left: 0;
+            left: 50%;
+            transform: translateX(-50%);
             bottom: 0;
             width: 0;
             height: rem(1);
@@ -211,16 +219,18 @@
 .characters-product {
     display: grid;
     column-gap: rem(50);
-    row-gap: rem(20);
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: 1fr;
     margin-top: rem(20);
-    @media (max-width:$mobile){
-         grid-template-columns: 1fr; 
+    @media (max-width: $mobile) {
+        grid-template-columns: 1fr;
     }
     &__item {
-        display: flex;
-        justify-content: space-between;
-        align-items: flex-end;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        padding: rem(15) 0;
+        &:not(:last-child) {
+            border-bottom: 1px solid #e9e9e9;
+        }
     }
     &__name {
         font-weight: 500;
@@ -228,7 +238,6 @@
     }
     &__value {
         min-width: rem(100);
-        text-align: right;
         font-size: rem(14);
     }
 }
@@ -274,9 +283,9 @@
         & p {
             flex: 1 1 auto;
         }
-        & span{
-            @media (max-width:$mobileSmall){
-                 display: none; 
+        & span {
+            @media (max-width: $mobileSmall) {
+                display: none;
             }
         }
     }
@@ -318,10 +327,10 @@
         display: flex;
         align-items: center;
         column-gap: rem(10);
-        @media (max-width:$mobileSmall){
-             flex-direction: column; 
-             align-items: flex-start;
-             row-gap: rem(5);
+        @media (max-width: $mobileSmall) {
+            flex-direction: column;
+            align-items: flex-start;
+            row-gap: rem(5);
         }
     }
     &__response {
@@ -335,5 +344,28 @@
     }
     &__code {
         font-size: rem(12);
+    }
+}
+.tab-product {
+    &__subtitle {
+        display: block;
+        text-align: center;
+        max-width: 100%;
+    }
+    &__text {
+        margin-top: rem(20);
+        text-align: center;
+        &:not(:last-child) {
+            margin-bottom: rem(30);
+        }
+        & p {
+            line-height: 1.5;
+            &:not(:last-child) {
+                margin-bottom: rem(15);
+            }
+            & strong {
+                font-weight: 500;
+            }
+        }
     }
 }

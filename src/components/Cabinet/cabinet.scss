@@ -293,7 +293,7 @@
             }
         }
     }
-    & &__box {
+    &__box {
         display: flex;
         align-items: center;
         column-gap: rem(10);
@@ -302,7 +302,8 @@
         &::before {
             display: none;
         }
-        & span {
+        & a{
+            display: inline-block;
             max-width: rem(250);
         }
     }

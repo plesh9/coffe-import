@@ -261,6 +261,9 @@
     height: rem(220);
     margin: 0 auto;
     transition: all .2s ease;
+    & img{
+      object-fit: contain;
+    }
   }
   &__title{
     display: flex;
@@ -297,24 +300,6 @@
   }
   &__rating{
     flex: 1 1 auto;
-    display: flex;
-  }
-  &__star{
-    &::before{
-      content: '★';
-      display: block;
-      color: #9d9b9b;
-      font-size: rem(20);
-    }
-    &-active{
-      &::before{
-        content: '★';
-        display: block;
-        color: #9d9b9b;
-        font-size: rem(20);
-        color: #ffa700;
-      }
-    }
   }
   &__response{
     font-size: rem(12);

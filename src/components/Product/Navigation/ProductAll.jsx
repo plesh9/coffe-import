@@ -1,4 +1,4 @@
-import Rating from "../../Rating";
+import Rating from "../../Ratings/Rating";
 import { BiWallet } from "react-icons/bi"
 import { BiCheckShield } from "react-icons/bi"
 import CourierIcon from "../../Icons/CourierIcon";
@@ -8,6 +8,8 @@ import ProductCharacter from "./ProductCharacter";
 import { useSelector } from "react-redux";
 import { useCart } from "../../../hooks/useCart";
 import useMediaQuery from "../../../tools/useMediaQuery";
+import CustomRating from "../../Ratings/CustomRating";
+import ReactImageMagnify from 'react-image-magnify';
 
 function ProductAll() {
     const m_tablet = useMediaQuery("(max-width: 991.98px)");
@@ -16,19 +18,42 @@ function ProductAll() {
     const currentProduct = products.find(product => product.id === productId);
     const { handleAddToCart } = useCart()
 
+    const style = {
+      zIndex: '1',
+      backgroundColor: '#fff'
+    }
+
     return ( 
         <div className="product__all">
         <div className="product__content">
-
           <div className="product__img">
-            <img src={currentProduct.imgUrl} alt={currentProduct.title} />
+            <ReactImageMagnify
+            className="product__magnify"
+            enlargedImageContainerStyle={style}
+            {...{
+              smallImage: {
+                  alt: currentProduct.title,
+                  isFluidWidth: true,
+                  src: currentProduct.imgUrl,
+              },
+              largeImage: {
+                  alt: currentProduct.title,
+                  src: currentProduct.imgUrl,
+                  width: 700,
+                  height: 700,
+              },
+              enlargedImagePosition: 'over',
+              lensStyle: {backgroundColor: "rgba(0,0,0,.6)"}
+              // isHintEnabled: true
+            }} />
+            {/* <img src={currentProduct.imgUrl} alt={currentProduct.title} /> */}
           </div>
           <div className="product__info">
             <h1 className="product__title title title-secondary">{currentProduct.title}</h1>
             <div className="product__rating rating-product">
               <div className="rating-product__block">
-                <Rating edit={false} className="rating-product__stars" />
-                <a href="#" className="rating-product__response">Залиши відгук</a>
+                <CustomRating className="rating-product__stars" />
+                <a href="#" className="rating-product__response">Залишити відгук</a>
               </div>
               <p className="rating-product__code">Код виробника: <span>{currentProduct.vendorCode}</span></p>
             </div>
