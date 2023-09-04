@@ -41,7 +41,7 @@ function Menu() {
         <div className="menu__right">
           <Basket />
           {isAuth ? 
-            <NavLink to='/cabinet' className="menu__profile">
+            <NavLink to='/cabinet/orders' className="menu__profile">
               <Avatar />
             </NavLink> : 
             <NavLink to='/login' className="menu__profile"><ProfileIcon /></NavLink>

@@ -1,11 +1,10 @@
 import "./_main.scss";
 import "swiper/swiper-bundle.min.css";
 import AllcategoryBtn from "../Btns/AllcategoryBtn";
-import { NavLink } from "react-router-dom";
-import PaginatedItems from "../CardsList/productPage";
 import MainSwiper from "./Swiper";
 import Actions from "./Actions";
-import CategoryList from "../Categories/CategoryList";
+import MainProducts from "./MainComponents/MainProducts";
+import MainCategory from "./MainComponents/MainCategory";
 
 function Main({ m_12 }) {
   return (
@@ -15,9 +14,7 @@ function Main({ m_12 }) {
         {!m_12 && (<AllcategoryBtn />)}
         <Actions />
       </div>
-
-      <CategoryList itemsPerPage={7} title='Популярні категорії' listClassName='items-main__list'/>
-
+      <MainCategory />
       <div className="main__items items-main">
         <div className="items-main__container">
           <h2 className="items-main__title title">Онлайн-консультант</h2>
@@ -105,12 +102,7 @@ function Main({ m_12 }) {
           </ul>
         </div>
       </div>
-
-      <div className="main__cards cards-main">
-        <PaginatedItems itemsPerPage={8} title='Хіти продажів' />
-        <NavLink to='/catalog' className="show-more__btn btn">Переглянути все</NavLink>
-      </div>
-
+      <MainProducts />
       <div className="main__help help-main">
         <div className="help-main__container">
           <h2 className="help-main__title title">Допомога</h2>

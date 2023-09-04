@@ -11,12 +11,8 @@ import { checkAuth, setLoading } from "../../state/reducers/authReducer";
 import { scrollLock, scrollUnlock } from "../../tools/subFunctions";
 
 function Cabinet() {
-  const { onLogout, isLoading, verify } = useAuth();
+  const { onLogout, isLoading } = useAuth();
   const { openModal, closeModal, closeModalOnClickOut, isOpen } = useModal();
-
-  useEffect(() => {
-    verify()
-  }, [])
 
   if (isLoading) {
     return <Loader />;

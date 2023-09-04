@@ -1,35 +1,16 @@
-import { useSelector } from "react-redux";
-import { NavLink, Outlet, Route, Routes, useMatch, useParams } from "react-router-dom";
-import useMediaQuery from "../../tools/useMediaQuery";
-import NotFound from "../NotFound";
-import ProductAll from "./Navigation/ProductAll";
+import { Route, Routes, } from "react-router-dom";
+import { useCurrentProduct } from "../../../hooks/useCurrentProduct";
+import NotFound from "../../NotFound";
+import ProductAll from "./Navigation/ProductAll/ProductAll";
 import ProductCharacter from "./Navigation/ProductCharacter";
 import ProductComments from "./Navigation/ProductComments/ProductComments";
 import ProductDelivery from "./Navigation/ProductDelivery";
 import "./product.scss"
+import ProductNav from "./ProductNav";
+
 
 function Product() {
-  const m_tablet = useMediaQuery("(max-width: 991.98px)");
-
-  const { productId } = useParams();
-  const { products } = useSelector(state => state.shop);
-  const currentProduct = products.find(product => product.id === productId);
-  const productPath = '/product/' + productId
-
-  function ProductNav({ path, text }) {
-    const match = useMatch(path);
-  
-    return (
-      <li className="nav-product__item">
-        <NavLink
-          to={path}
-          className={`nav-product__btn ${match ? 'nav-product__btn-active' : ''}`}
-        >
-          {text}
-        </NavLink>
-      </li>
-    );
-  }
+  const {currentProduct, productPath} = useCurrentProduct()
 
   if (!currentProduct){
     return <NotFound title="Такого товару немає" />

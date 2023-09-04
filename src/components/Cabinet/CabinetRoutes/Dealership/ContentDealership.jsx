@@ -2,7 +2,7 @@ function ContentDealership() {
   return (
     <>
       <h1 className="cabinet__title title title-secondary">
-        ЗНИЖКА. ЯКА ЦІНА ДЛЯ ДИЛЕРУ?
+        Знижка. Яка ціна для дилеру?
       </h1>
       <div className="cabinet__text">
         <p>
@@ -15,7 +15,7 @@ function ContentDealership() {
           нарахування знижки -3% для мене».
         </p>
       </div>
-      <h1 className="cabinet__title title title-secondary">ОСОБИСТИЙ БАЛАНС</h1>
+      <h1 className="cabinet__title title title-secondary">Особистий баланс</h1>
       <div className="cabinet__text">
         <p>
           Система взаєморозрахунків – це особистий баланс, яким Ви маєте
@@ -26,7 +26,7 @@ function ContentDealership() {
         </p>
       </div>
       <h1 className="cabinet__title title title-secondary">
-        ОФОРМЛЕННЯ ЗАМОВЛЕННЯ
+        Оформлення замовлення
       </h1>
       <div className="cabinet__text">
         <p>
@@ -44,7 +44,7 @@ function ContentDealership() {
         </p>
       </div>
       <h1 className="cabinet__title title title-secondary">
-        ЗВОРОТНИЙ ЗВ'ЯЗОК
+        Зворотній зв'язок
       </h1>
       <div className="cabinet__text">
         <p>

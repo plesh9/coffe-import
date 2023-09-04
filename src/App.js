@@ -4,18 +4,15 @@ import { getShop, setIsLoading } from "./state/reducers/shopReducer";
 import { Navigate, Route, Routes } from "react-router-dom";
 import "./Styles/scss/app.scss";
 import useMediaQuery from "./tools/useMediaQuery";
-import Footer from "./components/Footer/Footer";
 import Loader from "./components/Loader";
 import { scrollLock, scrollUnlock } from "./tools/subFunctions";
 import Checkout from "./components/Checkout/Checkout";
 import Login from "./components/Login/Login";
-import axios from 'axios'
-import { checkAuth } from "./state/reducers/authReducer";
 import LayoutRoute from "./utils/router/LayoutRoute";
-import CategotyList from "./components/Categories/CategoryList";
-import CatalogList from "./components/Categories/CatalogList";
+import Categories from "./components/Shop/Categories/Categories";
+import Catalog from "./components/Shop/Categories/Catalog";
 import NotFound from "./components/NotFound";
-import PaginatedItems from "./components/CardsList/productPage";
+import Products from "./components/Shop/Products/Products";
 import Main from "./components/Main/Main";
 import Thanks from "./components/Thanks";
 import PrivateRoute from "./utils/router/PrivateRoute";
@@ -27,33 +24,31 @@ import { useAuth } from "./hooks/useAuth";
 import Dealership from "./components/Cabinet/CabinetRoutes/Dealership/Dealership";
 import NewDealer from "./components/Cabinet/CabinetRoutes/Dealership/NewDealer/NewDealer";
 import RegisterAdmin from "./components/RegisterAdmin/RegisterAdmin";
-import Product from "./components/Product/Product";
-import ProductAll from "./components/Product/Navigation/ProductAll";
-import ProductCharacter from "./components/Product/Navigation/ProductCharacter";
-import ProductDelivery from "./components/Product/Navigation/ProductDelivery";
+import Product from "./components/Shop/Product/Product";
 
 
-function Wrapper() {
+function App() {
   const shop = useSelector(state => state.shop)
   const dispatch = useDispatch()
   const m_12 = useMediaQuery("(min-width: 1201px)");
   const { verify } = useAuth();
-
+  
   useEffect(() => {
-    scrollLock()
-    dispatch(setIsLoading(true));
-    document.documentElement.classList.add("no-scroll");
-    dispatch(getShop()).then(() => {
-      dispatch(setIsLoading(false));
-      if (document.documentElement.classList.contains("no-scroll")) {
-        document.documentElement.classList.remove("no-scroll");
+    const fetchShop = async () => {
+      try {
+        scrollLock();
+        dispatch(setIsLoading(true));
+        await dispatch(getShop());
+        dispatch(setIsLoading(false));
+        scrollUnlock();
+      } catch (error) {
+        console.log(error)
       }
-      scrollUnlock()
-    })
-
-    verify()
-
-  }, [])
+    };
+    
+    fetchShop();
+    verify();
+  }, []);
 
   
   if (shop.isLoading) {
@@ -65,9 +60,9 @@ function Wrapper() {
       <Routes>
           <Route element={<LayoutRoute /> } >
             <Route path="/" element={<Main m_12={m_12} />} />
-            <Route path="/catalog" element={<CatalogList itemsPerPage={32} pagination={true} />} />
-            <Route path="/catalog/:catalogPath" element={<CategotyList itemsPerPage={32} pagination={true} />} />
-            <Route path="/catalog/:catalogPath/:categoryId" element={<PaginatedItems itemsPerPage={m_12 ? 32 : 16} pagination={true} />} />
+            <Route path="/catalog" element={<Catalog itemsPerPage={32} />} />
+            <Route path="/catalog/:catalogPath" element={<Categories itemsPerPage={32} />} />
+            <Route path="/catalog/:catalogPath/:categoryId" element={<Products itemsPerPage={m_12 ? 32 : 16} />} />
             <Route path="/product/:productId/*" element={<Product />} />
             <Route path="/thanks" element={<Thanks /> } />
             <Route path="*" element={<NotFound title="На жаль, такої сторінки немає :(" /> } />
@@ -92,4 +87,4 @@ function Wrapper() {
   );
 }
 
-export default Wrapper;
+export default App;

@@ -1,7 +1,9 @@
+import { useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
-import missing from "../../images/missing-image.svg"
+import missing from "../../../images/missing-image.svg"
 
-function CategoryItem({ currentCategory, products, catalogPath }) {
+function CategoryItem({ currentCategory, catalogPath }) {
+  const { products } = useSelector(state => state.shop)
   
   function getCategoryImg() {
     const currentCategoryProducts = products.filter(product => product.categoryId === currentCategory.id)

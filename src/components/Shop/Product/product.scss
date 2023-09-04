@@ -1,4 +1,4 @@
-@import "../../Styles/scss/style";
+@import "../../../Styles/scss/style";
 
 .product {
     margin-top: rem(10);
@@ -34,10 +34,10 @@
             margin: 0 auto rem(15);
         }
     }
-    &__magnify{
+    &__magnify {
         width: 100% !important;
         height: 100% !important;
-        & > img{
+        & > img {
             height: 100% !important;
             object-fit: contain;
         }
@@ -124,7 +124,7 @@
     &__subtitle {
         font-weight: 500;
         color: #161616;
-        font-size: rem(21);
+	    @include adaptiveValue("font-size", 21, 17, 767, 320, 1);
         max-width: rem(800);
     }
     &__description {
@@ -351,12 +351,21 @@
         display: block;
         text-align: center;
         max-width: 100%;
+        @media (max-width: $mobile) {
+            text-align: left;
+        }
     }
     &__text {
         margin-top: rem(20);
         text-align: center;
+        @media (max-width: $mobile) {
+            text-align: left;
+        }
         &:not(:last-child) {
             margin-bottom: rem(30);
+            @media (max-width:$mobile){
+                margin-bottom: rem(20); 
+            }
         }
         & p {
             line-height: 1.5;

@@ -57,7 +57,7 @@ main {
 	// overflow-x: hidden;
 }
 .categories,
-.productList {
+.products {
 	margin-top: rem(20);
 }
 footer {
@@ -210,6 +210,13 @@ footer {
 		pointer-events: none;
 	}
 }
+.show-more__btn {
+	display: block;
+	width: fit-content;
+	margin: 0 auto;
+	margin-top: rem(20);
+	padding: rem(13) rem(25);
+}
 .title {
 	width: fit-content;
 	font-weight: 700;
@@ -239,20 +246,20 @@ footer {
 		}
 	}
 }
-.productList,
-.productList__container,
+.products,
+.products__container,
 .categories,
 .categories__container {
 	display: flex;
 	flex-direction: column;
 	flex: 1 1 auto;
 }
-.productList,
+.products,
 .categories {
 	min-height: rem(550);
 }
 main > div > .categories,
-main > div > .productList {
+main > div > .products {
 	min-height: auto;
 }
 .not-fond {

@@ -56,7 +56,7 @@ function Navbar() {
                 <NavbarNavLink to='/registration' className="navbar__sign">Реєстрація</NavbarNavLink>
               </div> }
             {isAuth && 
-                <NavbarNavLink to='/cabinet' className='navbar__profile'>
+                <NavbarNavLink to='/cabinet/orders' className='navbar__profile'>
                   <Avatar />
                   <p>{user?.firstname}</p>
                 </NavbarNavLink>

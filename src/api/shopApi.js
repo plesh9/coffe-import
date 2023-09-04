@@ -1,8 +1,8 @@
 import axios from "axios"
 import $api, { API_URL } from "../http"
 
-const SHOP_URL = "https://proxy-cors-server.onrender.com/shop"
-// const SHOP_URL = `http://localhost:5000/shop`
+// const SHOP_URL = "https://proxy-cors-server.onrender.com/shop"
+const SHOP_URL = `http://localhost:5000/shop`
 
 // export const shopApi = {
 //   async getShop(){
@@ -34,7 +34,7 @@ function parseXmlProductToArray(data) {
   const productArray = [];
 
   productList.forEach((el) => {
-    console.log(el)
+    // console.log(el)
     productArray.push({
       title: el.querySelector('name').textContent,
       price: el.querySelector('price').textContent,
