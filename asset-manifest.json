@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/coffe-import/static/css/main.a9c39f01.css",
-    "main.js": "/coffe-import/static/js/main.fd0cabae.js",
+    "main.css": "/coffe-import/static/css/main.5a3ac056.css",
+    "main.js": "/coffe-import/static/js/main.520c01c5.js",
     "static/media/Rubik-Medium.ttf": "/coffe-import/static/media/Rubik-Medium.115acab02aed19275f71.ttf",
     "static/media/Rubik-Bold.ttf": "/coffe-import/static/media/Rubik-Bold.433b599535e1d929aaf8.ttf",
     "static/media/Rubik-Regular.ttf": "/coffe-import/static/media/Rubik-Regular.f887c9f4ac165f5e1912.ttf",
@@ -10,14 +10,14 @@
     "static/media/swiper-1.webp": "/coffe-import/static/media/swiper-1.10d2708598352c467740.webp",
     "static/media/logo.png": "/coffe-import/static/media/logo.cf4e51e0ffcaab89b40d.png",
     "static/media/missing-image.svg": "/coffe-import/static/media/missing-image.107e93902ff19e6a25396b13f380c196.svg",
-    "static/media/basket.svg": "/coffe-import/static/media/basket.58667f9ab914ba96bbda9ab2cdd754a3.svg",
+    "static/media/basket.svg": "/coffe-import/static/media/basket.00385b769337ab8a201be60bd926afff.svg",
     "index.html": "/coffe-import/index.html",
     "static/media/search.svg": "/coffe-import/static/media/search.46f83f6bbf60bc904bb85857bf65b5ea.svg",
-    "main.a9c39f01.css.map": "/coffe-import/static/css/main.a9c39f01.css.map",
-    "main.fd0cabae.js.map": "/coffe-import/static/js/main.fd0cabae.js.map"
+    "main.5a3ac056.css.map": "/coffe-import/static/css/main.5a3ac056.css.map",
+    "main.520c01c5.js.map": "/coffe-import/static/js/main.520c01c5.js.map"
   },
   "entrypoints": [
-    "static/css/main.a9c39f01.css",
-    "static/js/main.fd0cabae.js"
+    "static/css/main.5a3ac056.css",
+    "static/js/main.520c01c5.js"
   ]
 }
