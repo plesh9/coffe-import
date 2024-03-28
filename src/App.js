@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getShop, setIsLoading } from "./state/reducers/shopReducer";
 import { Navigate, Route, Routes } from "react-router-dom";
-import "./Styles/scss/app.scss";
+import "./Styles/scss/App.scss";
 import useMediaQuery from "./tools/useMediaQuery";
 import Loader from "./components/Loader";
 import { scrollLock, scrollUnlock } from "./tools/subFunctions";
